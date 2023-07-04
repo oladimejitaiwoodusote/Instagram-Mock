@@ -1,12 +1,12 @@
-import logo from './logo.svg';
 import Login from './componenets/Login';
 import './App.css';
+import {Routes, Route} from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <h1>Instagram Mock</h1>
-    </div>
+    <Routes>
+      <Route path="/login" element={<Login/>}/>
+    </Routes>
   );
 }
 
