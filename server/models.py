@@ -14,9 +14,16 @@ metadata = MetaData(naming_convention=convention)
 
 db = SQLAlchemy(metadata=metadata)
 
-#Define Models: Users, Posts, Comments, Likes
-#Relationships
-#Constraints
+#Next Steps: Validations
+#Seed Data:
+#Login Page
+#Gitignor Database
+
+user_follows = db.Table(
+    "user_follows",
+    db.Column('user_id', db.Integer, db.ForeignKey("users.id")),
+    db.Column('following_id', db.Integer, db.ForeignKey("users.id"))
+)
 
 class User(db.Model):
 
@@ -36,9 +43,15 @@ class User(db.Model):
     likes = db.relationship("Like", backref='user')
     comments = db.relationship("Comment", backref='user')
 
+    following = db.relationship(
+        "User", lambda:user_follows,
+        primaryjoin = lambda: User.id == user_follows.c.user_id,
+        secondaryjoin = lambda: User.id == user_follows.c.following_id,
+        backref = "followers"
+    )
 
     def __repr__(self):
-        return f"<User id={self.id} username={self.username}"
+        return f"<User id={self.id} username={self.username}>"
 
     def to_dict(self):
         return {
@@ -60,7 +73,7 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, server_default = db.func.now(), onupdate=db.func.now())
 
-    user_id = db.Column(db.Integer, db.ForegnKey("users.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     likes = db.relationship("Like", backref='post')
     comments = db.relationship("Comment", backref="comment")
 
