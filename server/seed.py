@@ -112,4 +112,16 @@ if __name__ == "__main__":
         db.session.commit()
         #Make connections
         for u in users:
-            u.following = sample(users)
+            u.following = sample(users,randint(0,len(users)-1))
+
+        posts = create_posts(users)
+        db.session.add_all(posts)
+        db.session.commit()
+
+        likes = create_likes(users, posts)
+        db.session.add_all(likes)
+        db.session.commit()
+
+        comments = create_comments(users, posts)
+        db.session.add_all(comments)
+        db.session.commit()
