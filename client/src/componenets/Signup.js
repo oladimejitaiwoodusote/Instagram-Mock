@@ -25,6 +25,7 @@ function Signup({attemptSignup}) {
     <div className = 'signup-container'> 
         <div className='signup-formContainer'>
             <h1 className='signup-logo'>Instagram</h1>
+            <p className='signup-text'>Sign up to see photos and videos from your friends</p>
             <form className='signup-form' onSubmit={submitHandler}>
                 <input className='signup-input-field' name="email" placeholder="Email" onChange={changeHandler} value={formData.email}/>
                 <input className='signup-input-field' name="full_name" placeholder="Full Name" onChange={changeHandler} value={formData.full_name}/>

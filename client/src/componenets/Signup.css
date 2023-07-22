@@ -1,47 +1,22 @@
 .signup-container{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: #fafafa;
-
+    margin-top: 10px;
 }
 
 .signup-formContainer{
-    padding: 20px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    background-color: #fff;
-    max-width: 400px;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 300px;
+    box-sizing: border-box;
     width: 100%;
-}
 
-.signup-logo{
-    text-align: center;
-    margin-bottom: 20px;   
-    color: #3897f0;
-    font-weight: bold;
-}
-
-.signup-input-field{
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 3px;
-    border: 1px solid #ddd;
-    font-size: 14px;
-}
-
-.signup-submit-button{
-    width: 100%;
-    padding: 10px;
-    background: #3897f0;
-    border: none;
-    border-radius: 3px;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
 }
 
 .signup-login-only{
@@ -49,7 +24,40 @@
     padding: 3.6rem;
     border-radius: 0px;
     padding-bottom: 0px;
-    padding-top: 0px; 
+    padding-top: 0px;
+    max-width: 300px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.signup-logo{
+    font-family: 'Billabong', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #3897f0;
+}
+
+.signup-form{
+    display:flex;
+    flex-direction: column;
+    max-width: 300px;
+    width: 100%;
+}
+
+.signup-input-field{
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 3px
+}
+
+.signup-submit-button{
+    background-color: #0095F6;
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
 .signup-login-text{
@@ -59,6 +67,10 @@
 .signup-login-button{
     border: none;
     background-color: transparent;
-    color: black;
+    color: #0095F6;
     cursor: pointer;
+}
+
+.signup-text {
+    text-align: center;
 }
