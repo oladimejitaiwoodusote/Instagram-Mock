@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response, session
 from flask_sqlalchemy import SQLAlchemy
 from models import *
 from flask_migrate import Migrate
@@ -14,11 +14,29 @@ bcrypt = Bcrypt(app)
 
 db.init_app(app)
 
+#Check session
+@app.get('/check_session')
+def check_session():
+    user_id = session.get('user_id')
+    current_user = User.query.get(user_id)
+    if current_user:
+        return current_user.to_dict(), 200
+    else:
+        return {"message": "Not logged in"}, 401
+
+
 #Create account
 @app.post('/signup')
 def signup():
     json = request.json
-    pw_hash = bcrypt.generate_password_hash
+    pw_hash = bcrypt.generate_password_hash(json['password']).decode('utf-8')
+    new_user = User(email = json['email'], full_name=json['full_name'], username=json['username'], password = pw_hash)
+    db.session.add(new_user)
+    db.session.commit()
+    session['user_id'] = new_user.id
+    return new_user.to_dict(), 201
+
+
 
 
 

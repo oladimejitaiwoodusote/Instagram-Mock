@@ -5,12 +5,14 @@ import {Routes, Route} from 'react-router-dom'
 import Signup from './componenets/Signup';
 
 function App() {
+  const [currentUser, setUser] = useState(null)
 
   function handleSignup(userdata){
+    
   }
 
   function handleLogin(userdata){
-    
+
   }
 
   return (
