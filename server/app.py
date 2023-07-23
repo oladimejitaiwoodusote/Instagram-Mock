@@ -36,7 +36,16 @@ def signup():
     session['user_id'] = new_user.id
     return new_user.to_dict(), 201
 
-
+#Login
+@app.post('/login')
+def login():
+    json = request.json
+    current_user = User.query.where(User.username == json['username']).first()
+    if (current_user and bcrypt.check_password_hash(current_user.password, json['password'])):
+        session['user_id'] = current_user.id
+        return current_user.to_dict(), 201
+    else:
+        return {"message": "Invalid username or password"}, 401
 
 
 
