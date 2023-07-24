@@ -20,6 +20,16 @@ function App() {
     .then(data => setUser(data))
   }
 
+  useEffect(()=> {
+    fetch('/check_session')
+    .then((response => {
+      if(response.ok){
+        response.json()
+        .then(data => setUser(data))
+      }
+    }))
+  },[])
+  
   function handleLogin(userdata){
     fetch('/login',{
       method: "POST",
