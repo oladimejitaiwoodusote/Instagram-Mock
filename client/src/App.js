@@ -3,6 +3,9 @@ import Login from './componenets/Login';
 import './App.css';
 import {Routes, Route} from 'react-router-dom'
 import Signup from './componenets/Signup';
+import ProfilePage from './componenets/ProfilePage';
+import MainFeed from './componenets/MainFeed';
+
 
 function App() {
   const [currentUser, setUser] = useState(null)
@@ -14,7 +17,7 @@ function App() {
         'Content-Type': 'application/json',
         'Accepts': 'application/json'
       },
-      body: JSON.stringify(userdata)
+      body: JSON.stringify(userdata) 
     })
     .then(response => response.json())
     .then(data => setUser(data))
@@ -55,6 +58,8 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login attempLogin={handleLogin}/>}/>
       <Route path="/signup" element={<Signup attemptSignup={handleSignup}/>}/>
+      <Route path="/profile_page" element={<ProfilePage currentUser={currentUser}/>}/>
+      <Route path="/main_feed" element={<MainFeed currentUser={currentUser}/>}/>
       
     </Routes>
   );
