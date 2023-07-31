@@ -8,7 +8,6 @@ function Login({attempLogin}) {
             username: "",
             password: ""
         }
-
     )
     
     function changeHandler(e){

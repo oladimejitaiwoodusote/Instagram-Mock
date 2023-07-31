@@ -6,6 +6,7 @@ from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 app.secret_key = b'W(H5q*N86Z/+J72'
 
@@ -47,6 +48,12 @@ def login():
     else:
         return {"message": "Invalid username or password"}, 401
 
+#Get Users Posts based on users id
+@app.get('/users_posts/<int:id>')
+def get_posts(id):
+    users_posts = Post.query.where(Post.user_id == id).all()
+    post_dicts = [post.to_dict() for post in users_posts]
+    return post_dicts, 201
 
 
 if __name__ == "__main__":

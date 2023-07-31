@@ -10,6 +10,16 @@ import MainFeed from './componenets/MainFeed';
 function App() {
   const [currentUser, setUser] = useState(null)
 
+  useEffect(()=> {
+    fetch('/check_session')
+    .then((response => {
+      if(response.ok){
+        response.json()
+      .then(data => setUser(data))
+      }
+    }))
+  },[])
+
   function handleSignup(userdata){
     fetch('/signup',{
       method : "POST",
@@ -22,16 +32,6 @@ function App() {
     .then(response => response.json())
     .then(data => setUser(data))
   }
-
-  useEffect(()=> {
-    fetch('/check_session')
-    .then((response => {
-      if(response.ok){
-        response.json()
-        .then(data => setUser(data))
-      }
-    }))
-  },[])
   
   function handleLogin(userdata){
     fetch('/login',{
@@ -57,7 +57,7 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login attempLogin={handleLogin}/>}/>
-      <Route path="/signup" element={<Signup attemptSignup={handleSignup}/>}/>
+      <Route path="/signup" element={<Signup attemptSignup={handleSignup} currentUser={currentUser}/>}/>
       <Route path="/profile_page" element={<ProfilePage currentUser={currentUser}/>}/>
       <Route path="/main_feed" element={<MainFeed currentUser={currentUser}/>}/>
       

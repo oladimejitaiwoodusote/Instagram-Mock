@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 import './Signup.css';
 
-function Signup({attemptSignup}) {
+function Signup({attemptSignup, currentUser}) {
 
+    const navigate = useNavigate()
     const [formData, setForm] = useState(
         {
             email: "",
@@ -20,6 +22,10 @@ function Signup({attemptSignup}) {
         e.preventDefault()
         attemptSignup(formData)
     }
+
+    // useEffect(()=> {
+    //     navigate('/profile_page')
+    // })
 
   return (
     <div className = 'signup-container'> 
