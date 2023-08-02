@@ -55,6 +55,13 @@ def get_posts(id):
     post_dicts = [post.to_dict() for post in users_posts]
     return post_dicts, 201
 
+#Get Posts comments
+@app.get('/comments/<int:id>')
+def get_comments(id):
+    comments = Comment.query.where(Comment.post_id == id)
+    comment_dicts = [comment.to_dict() for comment in comments]
+    return comment_dicts, 200
+
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)

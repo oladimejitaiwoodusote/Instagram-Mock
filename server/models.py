@@ -85,7 +85,9 @@ class Post(db.Model):
         return {
             "id": self.id,
             "caption": self.caption,
-            "image": self.image
+            "image": self.image,
+            "username": self.user.username,
+            "avatar": self.user.avatar
         }
 
 class Comment(db.Model):
@@ -107,7 +109,8 @@ class Comment(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "text": self.text
+            "text": self.text,
+            "user": self.user.username,
         }
 
 class Like(db.Model):
