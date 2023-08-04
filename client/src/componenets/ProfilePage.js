@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Post from './Post'
-
+import Avatar  from '@mui/material'
 
 function ProfilePage({currentUser}) {
     const [posts, setPosts] = useState([])
@@ -24,6 +24,9 @@ function ProfilePage({currentUser}) {
     if (currentUser){
         return (
             <div>
+                <div className="profile_page_data">
+                    <h1></h1>
+                </div>
                 {profile_posts}
             </div>
         )

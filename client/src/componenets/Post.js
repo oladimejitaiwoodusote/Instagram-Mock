@@ -20,7 +20,23 @@ function Post({post, user}) {
 
   function submitHandler(e){
     e.preventDefault()
+    const comment = {
+      "text": newComment,
+      "user_id": user.id,
+      "post_id": post.id
+    }
     
+    fetch(`/comment`,{
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accepts': 'application/json'
+      },
+      body: JSON.stringify(comment)
+    })
+    .then(response => response.json())
+    .then(comment => setComments([...comments, comment]))
+    setNewComment("")
   }
 
   function changeHandler(e){

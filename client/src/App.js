@@ -56,7 +56,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/login" element={<Login attempLogin={handleLogin}/>}/>
+      <Route path="/" element={<Login attempLogin={handleLogin}/>}/>
       <Route path="/signup" element={<Signup attemptSignup={handleSignup} currentUser={currentUser}/>}/>
       <Route path="/profile_page" element={<ProfilePage currentUser={currentUser}/>}/>
       <Route path="/main_feed" element={<MainFeed currentUser={currentUser}/>}/>

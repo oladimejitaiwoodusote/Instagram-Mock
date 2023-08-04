@@ -62,6 +62,15 @@ def get_comments(id):
     comment_dicts = [comment.to_dict() for comment in comments]
     return comment_dicts, 200
 
+#Add New Comment
+@app.post('/comment')
+def post_comment():
+    json = request.json
+    comment = Comment(text=json["text"], user_id=json["user_id"], post_id=json["post_id"])
+    db.session.add(comment)
+    db.session.commit()
+    return comment.to_dict(), 201
+
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
