@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from models import *
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
+import os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
