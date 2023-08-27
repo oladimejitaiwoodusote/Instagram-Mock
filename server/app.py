@@ -5,12 +5,15 @@ from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 import os
 from werkzeug.utils import secure_filename
+from google.cloud import storage
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 app.secret_key = b'W(H5q*N86Z/+J72'
+service_account_key_path = os.environ.get('SERVICE_ACCOUNT_KEY_PATH')
+storage_client = storage.Client.from_service_account_json(service_account_key_path)
 
 migrate = Migrate(app,db)
 bcrypt = Bcrypt(app)
