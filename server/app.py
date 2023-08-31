@@ -12,8 +12,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 app.secret_key = b'W(H5q*N86Z/+J72'
+
+#Cloud Lines
 service_account_key_path = os.environ.get('SERVICE_ACCOUNT_KEY_PATH')
 storage_client = storage.Client.from_service_account_json(service_account_key_path)
+bucket = storage_client.bucket('instagram-clone')
 
 migrate = Migrate(app,db)
 bcrypt = Bcrypt(app)
@@ -75,6 +78,34 @@ def post_comment():
     db.session.add(comment)
     db.session.commit()
     return comment.to_dict(), 201
+
+# #Upload Image to Bucket
+@app.post('/image_upload')
+def upload_image():
+    #Upload image to storage bucket
+    image = request.files['image']
+    if image:
+        image_blob = bucket.blob(image.filename)
+        image_blob.upload_from_file(image)
+
+        #Upload image url to database
+        caption = request.form.get('caption')
+        image_url = image_blob.public_url
+        user_id = session.get('user_id')
+
+        if user_id is None:
+            return jsonify({'error': 'User not logged in'}), 401
+
+        new_post = Post(caption = caption, image=image_url, user_id = user_id)
+        db.session.add(new_post)
+        db.session.commit()
+
+        return jsonify({'message': 'Image uploaded succesfully'}), 201
+
+    return jsonify({'message': 'No image uploaded'}), 401
+
+
+
 
 
 if __name__ == "__main__":
