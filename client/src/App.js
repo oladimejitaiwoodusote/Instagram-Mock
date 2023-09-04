@@ -5,6 +5,7 @@ import {Routes, Route} from 'react-router-dom'
 import Signup from './componenets/Signup';
 import ProfilePage from './componenets/ProfilePage';
 import MainFeed from './componenets/MainFeed';
+import Navbar from './componenets/Navbar';
 
 
 function App() {
@@ -55,13 +56,15 @@ function App() {
   }
 
   return (
-    <Routes>
-      <Route path="/" element={<Login attempLogin={handleLogin}/>}/>
-      <Route path="/signup" element={<Signup attemptSignup={handleSignup} currentUser={currentUser}/>}/>
-      <Route path="/profile_page" element={<ProfilePage currentUser={currentUser}/>}/>
-      <Route path="/main_feed" element={<MainFeed currentUser={currentUser}/>}/>
-      
-    </Routes>
+    <>
+      {currentUser? <Navbar/>:null}
+      <Routes>
+        <Route path="/" element={<Login attempLogin={handleLogin}/>}/>
+        <Route path="/signup" element={<Signup attemptSignup={handleSignup} currentUser={currentUser}/>}/>
+        <Route path="/profile_page" element={<ProfilePage currentUser={currentUser}/>}/>
+        <Route path="/main_feed" element={<MainFeed currentUser={currentUser}/>}/>
+      </Routes>
+    </>
   );
 }
 
