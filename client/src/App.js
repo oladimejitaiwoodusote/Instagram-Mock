@@ -6,6 +6,7 @@ import Signup from './componenets/Signup';
 import ProfilePage from './componenets/ProfilePage';
 import MainFeed from './componenets/MainFeed';
 import Navbar from './componenets/Navbar';
+import ImageUpload from './componenets/ImageUpload';
 
 
 function App() {
@@ -63,6 +64,8 @@ function App() {
         <Route path="/signup" element={<Signup attemptSignup={handleSignup} currentUser={currentUser}/>}/>
         <Route path="/profile_page" element={<ProfilePage currentUser={currentUser}/>}/>
         <Route path="/main_feed" element={<MainFeed currentUser={currentUser}/>}/>
+        <Route path="/image_upload" element={<ImageUpload currentUser={currentUser}/>}/>
+
       </Routes>
     </>
   );
