@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Post from './Post'
+import PostThumbnail from '../PostThumbnail'
 import Avatar  from '@mui/material'
 import ProfileHeader from './ProfileHeader'
 import './ProfilePage.css'
@@ -24,13 +25,17 @@ function ProfilePage({currentUser}) {
         return <Post key={post.id} post={post} user={currentUser}/>
     })
 
+    const profile_posts_thumbnails = posts.map(post => {
+        return <PostThumbnail key={post.id} post={post}/>
+    })
+
     if (currentUser){
         return (
             <div>
                 <ProfileHeader user={currentUser}/>
                 <hr className='ProfilePage_divider'/>
                 <div className="ProfilePage-posts_grid">
-                    {profile_posts}
+                    {profile_posts_thumbnails}
                 </div>
             </div>
         )

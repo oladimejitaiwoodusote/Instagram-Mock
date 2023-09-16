@@ -6,8 +6,9 @@
 }
 
 .ProfilePage-posts_grid{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    gap: 10px; /* Adjust the gap based on your preference */
+    width: 60%; /* This should match the width of your horizontal line */
+    margin: 20px auto; /* Center the grid container */    
 }
