@@ -14,11 +14,6 @@ metadata = MetaData(naming_convention=convention)
 
 db = SQLAlchemy(metadata=metadata)
 
-#Next Steps: Validations
-#Seed Data:
-#Login Page
-#Gitignor Database
-
 user_follows = db.Table(
     "user_follows",
     db.Column('user_id', db.Integer, db.ForeignKey("users.id")),
@@ -59,7 +54,10 @@ class User(db.Model):
             "email": self.email,
             "full_name": self.full_name,
             "username": self.username,
-            "avatar": self.avatar
+            "avatar": self.avatar,
+            "followingCount": len(self.following),
+            "followersCount": len(self.followers),
+            "postsCount": len(self.posts)
         }
 
 class Post(db.Model):

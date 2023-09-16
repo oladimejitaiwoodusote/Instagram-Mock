@@ -1,0 +1,32 @@
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.profile-header_stats {
+    display: flex;
+    gap: 20px; /* Space between each stat */
+}
+
+.profile-header_stats_text{
+    font-weight: 300;
+}
+
+.profile-header_avatar{
+    width: auto !important; 
+    height: calc(100% - 40px) !important; 
+    border-radius: 50% !important;
+    object-fit: cover;
+}
+
+.profile-header_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}

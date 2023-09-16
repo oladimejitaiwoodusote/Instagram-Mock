@@ -1,0 +1,13 @@
+.ProfilePage_divider{
+    width: 60%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin: 20px auto; 
+}
+
+.ProfilePage-posts_grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}

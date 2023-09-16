@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import Post from './Post'
 import Avatar  from '@mui/material'
 import ProfileHeader from './ProfileHeader'
+import './ProfilePage.css'
+
 
 function ProfilePage({currentUser}) {
     const [posts, setPosts] = useState([])
@@ -26,7 +28,10 @@ function ProfilePage({currentUser}) {
         return (
             <div>
                 <ProfileHeader user={currentUser}/>
-                {profile_posts}
+                <hr className='ProfilePage_divider'/>
+                <div className="ProfilePage-posts_grid">
+                    {profile_posts}
+                </div>
             </div>
         )
     }
