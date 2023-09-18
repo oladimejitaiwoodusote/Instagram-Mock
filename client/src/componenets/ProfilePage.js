@@ -22,12 +22,16 @@ function ProfilePage({currentUser}) {
     },[currentUser])
 
     function handleThumbnailClick(post){
-        console.log(post)
-        setSelectedPost(post)
+        // console.log(post)
+        // setSelectedPost(post)
+        return ()=> {
+            console.log(post)
+            setSelectedPost(post)
+        }
     }
 
     const profile_posts_thumbnails = posts.map(post => {
-        return <PostThumbnail key={post.id} post={post} onClick={handleThumbnailClick}/>
+        return <PostThumbnail key={post.id} post={post} onClick={handleThumbnailClick(post)}/>
     })
 
 
