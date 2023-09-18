@@ -42,7 +42,7 @@ function Post({post, user}) {
   function changeHandler(e){
     setNewComment(e.target.value)
   }
-
+  
   return (
     <div className="post">
       <div className='post_header'>

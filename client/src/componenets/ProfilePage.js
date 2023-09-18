@@ -22,17 +22,17 @@ function ProfilePage({currentUser}) {
     },[currentUser])
 
     function handleThumbnailClick(post){
-        // console.log(post)
-        // setSelectedPost(post)
-        return ()=> {
-            console.log(post)
-            setSelectedPost(post)
-        }
+        setSelectedPost(post)
+        console.log(post)
     }
 
     const profile_posts_thumbnails = posts.map(post => {
-        return <PostThumbnail key={post.id} post={post} onClick={handleThumbnailClick(post)}/>
+        return <PostThumbnail key={post.id} post={post} onClick={()=> handleThumbnailClick(post)}/>
     })
+
+    function handleCloseModal(){
+        setSelectedPost(null);
+    }
 
 
     if (currentUser){
@@ -43,7 +43,7 @@ function ProfilePage({currentUser}) {
                 <div className="ProfilePage-posts_grid">
                     {profile_posts_thumbnails}
                 </div>
-                {selectedPost? <FullPost post={selectedPost}/>:null}
+                {selectedPost? <FullPost post={selectedPost} onClose={handleCloseModal}/>:null}
                 {selectedPost? console.log(selectedPost):null}
             </div>
         )
