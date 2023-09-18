@@ -6,11 +6,11 @@ import Avatar from '@mui/material/Avatar';
 function FullPost({post, onClose}) {
     const [comments, setComments] = useState([])
 
-    useEffect(()=> {
-        fetch(`/comments/${post.id}`)
-        .then(response => response.json())
-        .then(data => setComments(data))
-    },[post.id])
+    // useEffect(()=> {
+    //     fetch(`/comments/${post.id}`)
+    //     .then(response => response.json())
+    //     .then(data => setComments(data))
+    // },[post.id])
 
     const commentSection = comments.map(comment => {
         return <h4 className='FullPost_comment' key={comment.id}>
@@ -28,7 +28,7 @@ function FullPost({post, onClose}) {
                     <p>{post.username}</p>
                 </div>
                 <div className="FullPost_comments">
-                    {commentSection}
+                    {/*commentSection*/}
                 </div>
                 <input type="text" placeholder="Add a comment..."/>
             </div>
