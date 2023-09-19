@@ -13,11 +13,11 @@
 
 .FullPost_content {
     background: #fff;
-    width: 80%;
-    height: 70%;
+    width: 70%;
+    height: 95%;
     display: flex;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
+    border-radius: 0px;
     overflow: hidden;
 }
 
@@ -41,11 +41,25 @@
     align-items: center;
     gap: 10px; /* Space between avatar and username */
     margin-bottom: 20px;
+    color: #333;
 }
 
-.FullPost_comments {
+.FullPost_header p {
+    color: #333;
+    font-weight: bold;
+}
+.FullPost_comment {
     flex-grow: 1; /* Takes available space */
     overflow-y: auto; /* Scroll if many comments */
+    font-weight: normal;
+    padding: 5px;
+}
+
+.FullPost_separator {
+    height: 1px;
+    width: 100%; /* or any width you desire */
+    margin: 10px 0; /* adjust for desired spacing */
+    border-top: 1px solid grey;
 }
 
 input[type="text"] {
@@ -66,3 +80,24 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
+
+.FullPost_username_caption {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.FullPost_caption {
+    font-weight: lighter;
+    margin: 0;
+    word-break: break-word;
+}
+
+.FullPost_caption_wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+
