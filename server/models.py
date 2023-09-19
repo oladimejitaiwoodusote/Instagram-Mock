@@ -109,6 +109,7 @@ class Comment(db.Model):
             "id": self.id,
             "text": self.text,
             "user": self.user.username,
+            "avatar": self.user.avatar
         }
 
 class Like(db.Model):

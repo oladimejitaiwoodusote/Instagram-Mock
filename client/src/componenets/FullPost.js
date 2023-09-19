@@ -18,6 +18,16 @@ function FullPost({post, onClose}) {
                </h4>
     })
 
+    const commentSection2=comments.map(comment => {
+        return <div className="FullPost_username_caption">
+                    <Avatar src={comment.avatar} alt={comment.user}/>
+                    <div className="FullPost_caption_container">
+                        <span className='FullPost_username'>{comment.user}</span>
+                        <p className='FullPost_caption'>{comment.text}</p>
+                    </div>
+               </div>
+    })
+
   return (
     <div className='FullPost'>
         <div className='FullPost_content'>
@@ -30,13 +40,13 @@ function FullPost({post, onClose}) {
                 <hr className="FullPost_separator" />
                 <div className="FullPost_username_caption">
                     <Avatar src={post.avatar} alt={post.username}/>
-                    <div className="FullPost_caption_wrap">
-                        <p>{post.username}</p>
+                    <div className="FullPost_caption_container">
+                        <span className='FullPost_username'>{post.username}</span>
                         <p className='FullPost_caption'>{post.caption}</p>
                     </div>
                 </div>
                 <div className="FullPost_comments">
-                    {commentSection}
+                    {commentSection2}
                 </div>
                 <input type="text" placeholder="Add a comment..."/>
             </div>
