@@ -1,10 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import './FullPost.css'
 import Avatar from '@mui/material/Avatar';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as solidHeart, faComment } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 
 function FullPost({post, onClose}) {
     const [comments, setComments] = useState([])
+    const [likes, setLikes] = useState(post.likes || 0);
+    const [isLiked, setIsLiked] = useState(false);
 
     useEffect(()=> {
         fetch(`/comments/${post.id}`)
@@ -13,12 +17,6 @@ function FullPost({post, onClose}) {
     },[post.id])
 
     const commentSection = comments.map(comment => {
-        return <h4 className='FullPost_comment' key={comment.id}>
-                    <strong>{comment.user}</strong> {comment.text}
-               </h4>
-    })
-
-    const commentSection2=comments.map(comment => {
         return <div className="FullPost_username_caption">
                     <Avatar src={comment.avatar} alt={comment.user}/>
                     <div className="FullPost_caption_container">
@@ -46,12 +44,22 @@ function FullPost({post, onClose}) {
                     </div>
                 </div>
                 <div className="FullPost_comments">
-                    {commentSection2}
+                    {commentSection}
+                </div>
+                <hr className="FullPost_separator" />
+                <div className="FullPost_engagement">
+                    <button className="FullPost_icon_button">
+                        <FontAwesomeIcon icon={isLiked? solidHeart : regularHeart} className={isLiked? 'FullPost_liked':''}/>
+                    </button>
+                    <button className='FullPost_icon_button'>
+                        <FontAwesomeIcon icon={faComment}/>
+                    </button>
+                    <p>{likes} likes</p>
                 </div>
                 <input type="text" placeholder="Add a comment..."/>
             </div>
         </div>
-        <button onClick={onClose}>Close</button>
+        <button className="FullPost_close_button" onClick={onClose}>Close</button>
     </div>
   )
 }
