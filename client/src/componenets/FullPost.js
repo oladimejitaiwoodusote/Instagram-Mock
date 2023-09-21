@@ -43,18 +43,22 @@ function FullPost({post, onClose}) {
                         <p className='FullPost_caption'>{post.caption}</p>
                     </div>
                 </div>
-                <div className="FullPost_comments">
-                    {commentSection}
-                </div>
-                <hr className="FullPost_separator" />
-                <div className="FullPost_engagement">
-                    <button className="FullPost_icon_button">
-                        <FontAwesomeIcon icon={isLiked? solidHeart : regularHeart} className={isLiked? 'FullPost_liked':''}/>
-                    </button>
-                    <button className='FullPost_icon_button'>
-                        <FontAwesomeIcon icon={faComment}/>
-                    </button>
-                    <p>{likes} likes</p>
+                <div className="FullPost_footer">
+                    <div className="FullPost_comments_scrollable">
+                        {commentSection}
+                    </div>
+                    <hr className="FullPost_separator" />
+                    <div className="FullPost_engagement">
+                        <div className="FullPost_engagement_icons">
+                            <button className="FullPost_icon_button">
+                                <FontAwesomeIcon icon={isLiked? solidHeart : regularHeart} className={isLiked? 'FullPost_liked':''}/>
+                            </button>
+                            <button className='FullPost_icon_button'>
+                                <FontAwesomeIcon icon={faComment}/>
+                            </button>
+                        </div>
+                        <p>{likes} likes</p>
+                    </div>
                 </div>
                 <input type="text" placeholder="Add a comment..."/>
             </div>
