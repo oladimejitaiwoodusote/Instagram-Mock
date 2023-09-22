@@ -164,14 +164,15 @@ input[type="text"] {
 .FullPost_footer {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     justify-content: space-between; /* Distributes space between comments and engagement section */    display: flex;
     flex-direction: column;
+    height: 75%;
 }
 
 .FullPost_comments_scrollable{
     overflow-y:auto;
     flex-grow: 1;
+    max-height: 100%;
 }
 
 input[type="text"] {
