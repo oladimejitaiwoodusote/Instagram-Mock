@@ -14,7 +14,7 @@
 .FullPost_content {
     background: #fff;
     width: 70%;
-    height: 95%;
+    height: 98%;
     display: flex;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border-radius: 0px;
@@ -34,6 +34,8 @@
     flex-direction: column;
     padding: 20px;
     overflow-y: auto; /* Scroll for overflow content */
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .FullPost_header {
@@ -42,6 +44,7 @@
     gap: 10px; /* Space between avatar and username */
     margin-bottom: 20px;
     color: #333;
+    padding-left: 10px;
 }
 
 .FullPost_header p {
@@ -87,6 +90,7 @@ input[type="text"] {
     gap: 10px;
     flex-wrap: wrap;
     margin-bottom: 20px;
+    padding-left: 10px;
 }
 
 .FullPost_caption {
@@ -117,6 +121,7 @@ input[type="text"] {
     flex-direction: column; 
     align-items: flex-start; 
     gap: 5px; 
+    padding-left: 10px;
 }
 
 .FullPost_engagement_icons {
@@ -183,4 +188,31 @@ input[type="text"] {
     width: 100%; /* Ensures the input box takes the full width */
 }
 
+.FullPost_comment_section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
 
+.FullPost_comment_section input[type='text']{
+    flex: 1;
+    margin-right: 10px;
+}
+
+.FullPost_comment_button {
+    padding: 10px 20px;
+    background-color: #3897f0;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    opacity: 0.7;
+}
+
+
+.FullPost_comment_button:hover {
+    background-color: #357ab7;
+}

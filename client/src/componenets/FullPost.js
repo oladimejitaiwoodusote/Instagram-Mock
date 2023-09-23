@@ -60,7 +60,11 @@ function FullPost({post, onClose}) {
                         <p>{likes} likes</p>
                     </div>
                 </div>
-                <input type="text" placeholder="Add a comment..."/>
+                <hr className="FullPost_separator"/>
+                <div className="FullPost_comment_section">
+                    <input type="text" placeholder="Add a comment..."/>
+                    <button className="FullPost_comment_button">POST</button>
+                </div>
             </div>
         </div>
         <button className="FullPost_close_button" onClick={onClose}>Close</button>
