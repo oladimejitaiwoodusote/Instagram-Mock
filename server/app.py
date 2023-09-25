@@ -70,6 +70,14 @@ def get_comments(id):
     comment_dicts = [comment.to_dict() for comment in comments]
     return comment_dicts, 200
 
+#Get Posts likes
+@app.get('/likes/<int:id>')
+def get_likes(id):
+    likes = Like.query.where(Like.post_id == id)
+    like_dicts = [like.to_dict() for like in likes]
+    return like_dicts, 200
+
+
 #Add New Comment
 @app.post('/comment')
 def post_comment():
@@ -103,10 +111,6 @@ def upload_image():
         return jsonify({'message': 'Image uploaded succesfully'}), 201
 
     return jsonify({'message': 'No image uploaded'}), 401
-
-
-
-
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)

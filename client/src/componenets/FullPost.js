@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import './FullPost.css'
 import Avatar from '@mui/material/Avatar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,12 +10,20 @@ function FullPost({post, onClose, user}) {
     const [newComment, setNewComment] = useState(null)
     const [likes, setLikes] = useState(post.likes || 0);
     const [isLiked, setIsLiked] = useState(false);
+    const commentInputRef = useRef(null)
 
     useEffect(()=> {
         fetch(`/comments/${post.id}`)
         .then(response => response.json())
         .then(data => setComments(data))
     },[post.id])
+
+
+    useEffect(()=> {
+        fetch(`/likes/${post.id}`)
+        .then(response => response.json())
+        .then(data => setLikes(data.length))
+    })
 
     const commentSection = comments.map(comment => {
         return <div className="FullPost_username_caption">
@@ -27,6 +35,9 @@ function FullPost({post, onClose, user}) {
                </div>
     })
 
+    function handleCommentIconClick(){
+        commentInputRef.current.focus()
+    }
     function submitHandler(e){
         e.preventDefault()
         const comment = {
@@ -79,7 +90,7 @@ function FullPost({post, onClose, user}) {
                             <button className="FullPost_icon_button">
                                 <FontAwesomeIcon icon={isLiked? solidHeart : regularHeart} className={isLiked? 'FullPost_liked':''}/>
                             </button>
-                            <button className='FullPost_icon_button'>
+                            <button className='FullPost_icon_button' onClick={handleCommentIconClick}>
                                 <FontAwesomeIcon icon={faComment}/>
                             </button>
                         </div>
@@ -89,7 +100,7 @@ function FullPost({post, onClose, user}) {
                 <hr className="FullPost_separator"/>
                 <form onSubmit={submitHandler}>
                     <div className="FullPost_comment_section">
-                            <input type="text" placeholder="Add a comment..." value={newComment} onChange={changeHandler} />
+                            <input type="text" placeholder="Add a comment..." value={newComment} onChange={changeHandler} ref={commentInputRef} />
                             <button type="submit" className="FullPost_comment_button">POST</button>
                     </div>
                 </form>
