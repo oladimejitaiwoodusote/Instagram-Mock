@@ -43,7 +43,7 @@ function ProfilePage({currentUser}) {
                 <div className="ProfilePage-posts_grid">
                     {profile_posts_thumbnails}
                 </div>
-                {selectedPost? <FullPost post={selectedPost} onClose={handleCloseModal}/>:null}
+                {selectedPost? <FullPost user={currentUser} post={selectedPost} onClose={handleCloseModal}/>:null}
                 {selectedPost? console.log(selectedPost):null}
             </div>
         )

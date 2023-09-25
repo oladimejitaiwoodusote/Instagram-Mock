@@ -159,7 +159,8 @@ input[type="text"] {
 
 .FullPost_icon_button svg {
     stroke: #333;  /* Black outline */
-    stroke-width: 30;  /* Adjust for desired thickness */
+    stroke-width: 2;  /* Adjust for desired thickness */
+    fill: #fff;
 }
 
 .FullPost_liked {

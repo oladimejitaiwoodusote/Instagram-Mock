@@ -5,8 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart, faComment } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 
-function FullPost({post, onClose}) {
+function FullPost({post, onClose, user}) {
     const [comments, setComments] = useState([])
+    const [newComment, setNewComment] = useState(null)
     const [likes, setLikes] = useState(post.likes || 0);
     const [isLiked, setIsLiked] = useState(false);
 
@@ -25,6 +26,31 @@ function FullPost({post, onClose}) {
                     </div>
                </div>
     })
+
+    function submitHandler(e){
+        e.preventDefault()
+        const comment = {
+            "text": newComment,
+            "user_id": user.id,
+            "post_id": post.id
+        }
+
+        fetch(`/comment`,{
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accepts': 'application/json'
+            },
+            body: JSON.stringify(comment)
+        })
+        .then(response => response.json())
+        .then(comment => setComments([...comments,comment]))
+        setNewComment("")
+    }
+
+    function changeHandler(e){
+        setNewComment(e.target.value)
+    }
 
   return (
     <div className='FullPost'>
@@ -61,10 +87,12 @@ function FullPost({post, onClose}) {
                     </div>
                 </div>
                 <hr className="FullPost_separator"/>
-                <div className="FullPost_comment_section">
-                    <input type="text" placeholder="Add a comment..."/>
-                    <button className="FullPost_comment_button">POST</button>
-                </div>
+                <form onSubmit={submitHandler}>
+                    <div className="FullPost_comment_section">
+                            <input type="text" placeholder="Add a comment..." value={newComment} onChange={changeHandler} />
+                            <button type="submit" className="FullPost_comment_button">POST</button>
+                    </div>
+                </form>
             </div>
         </div>
         <button className="FullPost_close_button" onClick={onClose}>Close</button>
