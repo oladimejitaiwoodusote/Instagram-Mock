@@ -77,6 +77,14 @@ def get_likes(id):
     like_dicts = [like.to_dict() for like in likes]
     return like_dicts, 200
 
+#Get like status of Post for current user
+@app.get('/like_status/<int:post_id>/<int:user_id>')
+def get_like_status(post_id, user_id):
+    like = Like.query.filter(Like.user_id == user_id, Like.post_id==post_id ).first() 
+    if like:
+        return {"message": True}
+    else:
+        return {"message": False}
 
 #Add New Comment
 @app.post('/comment')
@@ -111,6 +119,8 @@ def upload_image():
         return jsonify({'message': 'Image uploaded succesfully'}), 201
 
     return jsonify({'message': 'No image uploaded'}), 401
+
+
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)

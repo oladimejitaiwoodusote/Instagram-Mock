@@ -25,6 +25,12 @@ function FullPost({post, onClose, user}) {
         .then(data => setLikes(data.length))
     })
 
+    useEffect(()=> {
+        fetch(`/like_status/${post.id}/${user.id}`)
+        .then(response => response.json())
+        .then(data => setIsLiked(data.message))
+    },[post.id, user.id]) 
+
     const commentSection = comments.map(comment => {
         return <div className="FullPost_username_caption">
                     <Avatar src={comment.avatar} alt={comment.user}/>
