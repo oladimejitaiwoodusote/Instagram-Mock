@@ -108,8 +108,6 @@ def unlike_post(post_id, user_id):
     likes_count = Like.query.filter(Like.post_id == post_id).count()
     return {"isLiked": False, "likesCount": likes_count}
 
-
-
 #Add New Comment
 @app.post('/comment')
 def post_comment():

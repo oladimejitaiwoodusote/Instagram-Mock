@@ -70,7 +70,7 @@ function FullPost({post, onClose, user}) {
     }
 
     function handleLikeClick(){
-        const endpoint = isLiked ? `/unlike/${post.id}/${user.id}` : `/like/${post.id}:${user.id}`
+        const endpoint = isLiked ? `/unlike/${post.id}/${user.id}` : `/like/${post.id}/${user.id}`
 
         fetch(endpoint, {
             method: "POST",
