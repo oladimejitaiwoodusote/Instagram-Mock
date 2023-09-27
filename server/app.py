@@ -86,6 +86,30 @@ def get_like_status(post_id, user_id):
     else:
         return {"message": False}
 
+#Like Post
+@app.post('/like/<int:post_id>/<int:user_id>')
+def like_post(post_id, user_id):
+    like = Like.query.filter(Like.user_id == user_id, Like.post_id==post_id).first()
+    if not like:
+        new_like = Like(user_id = user_id, post_id = post_id)
+        db.session.add(new_like)
+        db.session.commit()
+
+    likes_count = Like.query.filter(Like.post_id == post_id).count()
+    return {"isLiked":True, "likesCount": likes_count}
+
+#Unlike Post
+@app.post('/unlike/<int:post_id>/<int:user_id>')
+def unlike_post(post_id, user_id):
+    like = Like.query.filter(Like.user_id == user_id, Like.post_id==post_id).first()
+    if like:
+        db.session.delete(like)
+        db.session.commit()
+    likes_count = Like.query.filter(Like.post_id == post_id).count()
+    return {"isLiked": False, "likesCount": likes_count}
+
+
+
 #Add New Comment
 @app.post('/comment')
 def post_comment():
@@ -94,6 +118,7 @@ def post_comment():
     db.session.add(comment)
     db.session.commit()
     return comment.to_dict(), 201
+
 
 # #Upload Image to Bucket
 @app.post('/image_upload')

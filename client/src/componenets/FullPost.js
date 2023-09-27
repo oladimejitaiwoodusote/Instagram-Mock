@@ -69,6 +69,19 @@ function FullPost({post, onClose, user}) {
         setNewComment(e.target.value)
     }
 
+    function handleLikeClick(){
+        const endpoint = isLiked ? `/unlike/${post.id}/${user.id}` : `/like/${post.id}:${user.id}`
+
+        fetch(endpoint, {
+            method: "POST",
+        })
+        .then(response => response.json())
+        .then(data => {
+            setIsLiked(data.isLiked)
+            setLikes(data.likesCount)
+        })
+    }
+
   return (
     <div className='FullPost'>
         <div className='FullPost_content'>
@@ -93,7 +106,7 @@ function FullPost({post, onClose, user}) {
                     <hr className="FullPost_separator" />
                     <div className="FullPost_engagement">
                         <div className="FullPost_engagement_icons">
-                            <button className="FullPost_icon_button">
+                            <button className="FullPost_icon_button" onClick={handleLikeClick}>
                                 <FontAwesomeIcon icon={isLiked? solidHeart : regularHeart} className={isLiked? 'FullPost_liked':''}/>
                             </button>
                             <button className='FullPost_icon_button' onClick={handleCommentIconClick}>
