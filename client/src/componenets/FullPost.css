@@ -40,8 +40,9 @@
 
 .FullPost_header {
     display: flex;
+    justify-content: space-between; /* Added this to distribute space */
     align-items: center;
-    gap: 10px; /* Space between avatar and username */
+    gap: 10px;
     margin-bottom: 20px;
     color: #333;
     padding-left: 10px;
@@ -216,4 +217,36 @@ input[type="text"] {
 
 .FullPost_comment_button:hover {
     background-color: #357ab7;
+}
+
+.FullPost_edit_delete {
+    display: flex;
+    gap: 10px;
+}
+
+.FullPost_edit_button, .FullPost_delete_button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    opacity: 0.7;
+}
+
+.FullPost_edit_button {
+    background-color: #007BFF; /* Blue for edit */
+}
+
+.FullPost_delete_button {
+    background-color: #dc3545; /* Red for delete */
+}
+
+.FullPost_edit_button:hover {
+    background-color: #0056b3;
+}
+
+.FullPost_delete_button:hover {
+    background-color: #b21a2c;
 }

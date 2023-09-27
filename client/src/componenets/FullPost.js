@@ -16,6 +16,8 @@ function FullPost({post, onClose, user}) {
         fetch(`/comments/${post.id}`)
         .then(response => response.json())
         .then(data => setComments(data))
+        console.log(post.user_id)
+        console.log(user.id)
     },[post.id])
 
 
@@ -82,14 +84,30 @@ function FullPost({post, onClose, user}) {
         })
     }
 
+    function handleEditClick(){
+        return 1
+    }
+
+    function handleDeleteClick(){
+        return 2
+    }
+
   return (
     <div className='FullPost'>
         <div className='FullPost_content'>
             <img src={post.image} alt="Post content" className="FullPost_image"/>
             <div className="FullPost_details">
                 <div className="FullPost_header">
-                    <Avatar src={post.avatar} alt={post.username}/>
-                    <p>{post.username}</p>
+                    <div className="FullPost_user_info">
+                        <Avatar src={post.avatar} alt={post.username}/>
+                        <p>{post.username}</p>
+                    </div>
+                    {post.user_id === user.id && (
+                        <div className="FullPost_edit_delete">
+                            <button className="FullPost_edit_button" onClick={handleEditClick}>Edit</button>
+                            <button className="FullPost_delete_button" onClick={handleDeleteClick}>Delete</button>
+                        </div>
+                    )}
                 </div>
                 <hr className="FullPost_separator" />
                 <div className="FullPost_username_caption">

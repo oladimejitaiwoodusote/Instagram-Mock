@@ -85,7 +85,8 @@ class Post(db.Model):
             "caption": self.caption,
             "image": self.image,
             "username": self.user.username,
-            "avatar": self.user.avatar
+            "avatar": self.user.avatar,
+            "user_id": self.user_id
         }
 
 class Comment(db.Model):
