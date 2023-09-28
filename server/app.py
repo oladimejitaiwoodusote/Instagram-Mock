@@ -117,6 +117,16 @@ def post_comment():
     db.session.commit()
     return comment.to_dict(), 201
 
+#Delete Post
+@app.delete('/delete_post/<int:post_id>')
+def delete_post(post_id):
+    post = Post.query.get(post_id)
+    if not post:
+        return {"message": "Post not found"}, 404
+
+    db.session.delete(post)
+    db.session.commit()
+    return {"message": "Post deleted succssfully"}, 200
 
 # #Upload Image to Bucket
 @app.post('/image_upload')

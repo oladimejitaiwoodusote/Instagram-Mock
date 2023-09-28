@@ -10,7 +10,10 @@ function FullPost({post, onClose, user}) {
     const [newComment, setNewComment] = useState(null)
     const [likes, setLikes] = useState(post.likes || 0);
     const [isLiked, setIsLiked] = useState(false);
+    const [showOptions, setShowOptions] = useState(false);
     const commentInputRef = useRef(null)
+    const optionsMenuRef = useRef
+    
 
     useEffect(()=> {
         fetch(`/comments/${post.id}`)
@@ -92,6 +95,10 @@ function FullPost({post, onClose, user}) {
         return 2
     }
 
+    function handleOptionsClick(){
+        setShowOptions(prev => !prev)
+    }
+
   return (
     <div className='FullPost'>
         <div className='FullPost_content'>
@@ -103,9 +110,14 @@ function FullPost({post, onClose, user}) {
                         <p>{post.username}</p>
                     </div>
                     {post.user_id === user.id && (
-                        <div className="FullPost_edit_delete">
-                            <button className="FullPost_edit_button" onClick={handleEditClick}>Edit</button>
-                            <button className="FullPost_delete_button" onClick={handleDeleteClick}>Delete</button>
+                        <div className="FullPost_options">
+                            <button className="FullPost_options_button" onClick={handleOptionsClick}>...</button>
+                            {showOptions && (
+                                <div className='FullPost_options_menu'>
+                                    <button className='FullPost_edit_button' onClick={handleEditClick}>Edit</button>
+                                    <button className='FullPost_delete_button' onClick={handleDeleteClick}>Delete</button>
+                                </div>
+                            )}
                         </div>
                     )}
                 </div>
