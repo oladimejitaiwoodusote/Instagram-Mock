@@ -5,16 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart, faComment } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 
-function FullPost({post, onClose, user}) {
+function FullPost({post, onClose, user, onPostDeleted}) {
     const [comments, setComments] = useState([])
     const [newComment, setNewComment] = useState(null)
     const [likes, setLikes] = useState(post.likes || 0);
     const [isLiked, setIsLiked] = useState(false);
     const [showOptions, setShowOptions] = useState(false);
     const commentInputRef = useRef(null)
-    const optionsMenuRef = useRef
     
-
     useEffect(()=> {
         fetch(`/comments/${post.id}`)
         .then(response => response.json())
@@ -92,7 +90,18 @@ function FullPost({post, onClose, user}) {
     }
 
     function handleDeleteClick(){
-        return 2
+        fetch(`/delete_post/${post.id}`, {
+            method: "DELETE",
+        })
+        .then(response => {
+            if(response.ok) {
+                onPostDeleted(post.id)
+                onClose();
+            } else {
+                console.error('Failed to delete post');
+            }
+        })
+
     }
 
     function handleOptionsClick(){

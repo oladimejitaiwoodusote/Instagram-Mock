@@ -34,6 +34,11 @@ function ProfilePage({currentUser}) {
         setSelectedPost(null);
     }
 
+    function handlePostDeleted(deletedPostId){
+        const updatedPosts = posts.filter(post => post.id !== deletedPostId)
+        setPosts(updatedPosts);
+    }
+
 
     if (currentUser){
         return (
@@ -43,7 +48,7 @@ function ProfilePage({currentUser}) {
                 <div className="ProfilePage-posts_grid">
                     {profile_posts_thumbnails}
                 </div>
-                {selectedPost? <FullPost user={currentUser} post={selectedPost} onClose={handleCloseModal}/>:null}
+                {selectedPost? <FullPost onPostDeleted={handlePostDeleted} user={currentUser} post={selectedPost} onClose={handleCloseModal}/>:null}
                 {selectedPost? console.log(selectedPost):null}
             </div>
         )
