@@ -11,6 +11,9 @@ function FullPost({post, onClose, user, onPostDeleted}) {
     const [likes, setLikes] = useState(post.likes || 0);
     const [isLiked, setIsLiked] = useState(false);
     const [showOptions, setShowOptions] = useState(false);
+    const [editMode, setEditMode] = useState(false);
+    const[editedCaption, setEditedCaption] = useState(post.caption);
+
     const commentInputRef = useRef(null)
     
     useEffect(()=> {
@@ -85,10 +88,35 @@ function FullPost({post, onClose, user, onPostDeleted}) {
         })
     }
 
-    function handleEditClick(){
-        return 1
+    function handleEditSubmit(e){
+        e.preventDefault()
+        fetch(`/edit_post/${post.id}`,{
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accepts': 'application/json'
+            },
+            body: JSON.stringify({
+                caption: editedCaption
+            })
+        })
+        .then(response => response.json())
+        .then(updatedPost => {
+            post.caption = updatedPost.caption;
+            setEditMode(false);
+        })
+        .catch(error => {
+            console.error("There was an error updating the post:", error);
+        });
     }
-
+    
+    function handleEditClick(){
+        if (editMode){
+            handleEditSubmit();
+        } else {
+            setEditMode(true);
+        }
+    }
     function handleDeleteClick(){
         fetch(`/delete_post/${post.id}`, {
             method: "DELETE",
@@ -135,7 +163,14 @@ function FullPost({post, onClose, user, onPostDeleted}) {
                     <Avatar src={post.avatar} alt={post.username}/>
                     <div className="FullPost_caption_container">
                         <span className='FullPost_username'>{post.username}</span>
-                        <p className='FullPost_caption'>{post.caption}</p>
+                        {
+                            editMode?
+                            <form onSubmit={handleEditSubmit}>
+                                <input type="text" value={editedCaption} onChange={e => setEditedCaption(e.target.value)}/>
+                            </form>
+                            :
+                            <p className='FullPost_caption'>{post.caption}</p>
+                        }
                     </div>
                 </div>
                 <div className="FullPost_footer">

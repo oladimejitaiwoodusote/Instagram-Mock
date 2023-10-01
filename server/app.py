@@ -128,6 +128,19 @@ def delete_post(post_id):
     db.session.commit()
     return {"message": "Post deleted succssfully"}, 200
 
+#Edit Post - caption
+@app.patch('/edit_post/<int:id>')
+def edit_post(id):
+    json = request.json
+    post = Post.query.get(id)
+
+    if not post:
+        return jsonify({'message': 'Post not found'}), 404
+
+    post.caption = json['caption']
+    db.session.commit()
+    return jsonify(post.to_dict()), 200
+
 # #Upload Image to Bucket
 @app.post('/image_upload')
 def upload_image():
