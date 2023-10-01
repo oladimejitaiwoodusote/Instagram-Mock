@@ -11,6 +11,16 @@
     z-index: 1000;
 }
 
+.FullPost_user_info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.FullPost_user_info p {
+    margin: 0;
+}
+
 .FullPost_content {
     background: #fff;
     width: 70%;
