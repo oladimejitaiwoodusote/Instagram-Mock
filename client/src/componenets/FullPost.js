@@ -169,7 +169,7 @@ function FullPost({post, onClose, user, onPostDeleted}) {
                                 <input type="text" value={editedCaption} onChange={e => setEditedCaption(e.target.value)}/>
                             </form>
                             :
-                            <p className='FullPost_caption'>{post.caption}</p>
+                            <span className='FullPost_caption'>{post.caption}</span>
                         }
                     </div>
                 </div>
