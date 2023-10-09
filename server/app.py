@@ -59,7 +59,8 @@ def login():
 #Get Users Posts based on users id
 @app.get('/users_posts/<int:id>')
 def get_posts(id):
-    users_posts = Post.query.where(Post.user_id == id).all()
+    #users_posts = Post.query.where(Post.user_id == id).all()
+    users_posts = Post.query.filter_by(user_id = id).order_by(Post.created_at.desc()).all()
     post_dicts = [post.to_dict() for post in users_posts]
     return post_dicts, 201
 
