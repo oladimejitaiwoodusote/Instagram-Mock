@@ -2,11 +2,12 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import './Navbar.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faHome, faEnvelope, faCompass, faPlusSquare, faUser, faSearch} from '@fortawesome/free-solid-svg-icons'
+import {faSearch} from '@fortawesome/free-solid-svg-icons'
 import {GoHomeFill} from 'react-icons/go'
 import {CgAddR, CgProfile} from 'react-icons/cg'
 import {MdOutlineExplore} from 'react-icons/md'
 import {BiMessageRoundedDetail} from 'react-icons/bi'
+import {AiOutlineInstagram, AiOutlineSearch} from 'react-icons/ai'
 
 
 function Navbar() {
@@ -15,10 +16,11 @@ function Navbar() {
       <nav className="navbar">
         <div className="navbar_logo-wrapper">
           {/* Replace with your actual logo */}
-          <span className="instagram-logo">Instagram</span>
+          <span className="navbar_instagram-logo">Instagram-Clone</span>
+          <AiOutlineInstagram/>
         </div>
         <div className='navbar_search'>
-            <FontAwesomeIcon icon={faSearch} className="navabar_search-icon" />
+            <AiOutlineSearch className="navbar_search-icon"/>
             <input type="text" placeholder="Search" className="navbar_search-input" />
         </div>
         <div className='navbar_icons'>

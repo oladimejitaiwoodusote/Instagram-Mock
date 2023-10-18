@@ -1,69 +1,78 @@
-/* Ensuring icons are black */
 .navbar_icon {
     color: black;
 }
+.navbar_instagram-logo{
+    font-size:x-large;
+    font-style: cursive;
+    font: bold;
+}
 
-/* Navbar Wrapper */
 .navbar_wrapper {
     display: flex;
     justify-content: center;
-    background-color: #fff; /* or whatever color you want for the background */
-    padding: 10px 0; /* Some padding on top and bottom */
-    border-bottom: 1px solid #e6e6e6; /* Border to resemble Instagram's navbar */
+    background-color: #fff;
+    padding: 10px 0; 
+    border-bottom: 1px solid #e6e6e6; 
 }
 
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between; 
-    width: 90%; /* Use a percentage or fixed width, e.g., 1000px, depending on your design preference */
-    max-width: 1200px; /* Limiting maximum width */
+    width: 90%; 
+    max-width: 1200px; 
 }
 
-/* Instagram Logo */
 .navbar_logo-wrapper {
     display: flex;
     align-items: center;
 }
 
-/* Styling for the search bar */
 .navbar_search {
-    margin: 0 20px; /* Some space on both sides for a bit of separation */
+    display: flex;
+    align-items: center; 
+    margin: 0 20px;
     position: relative;
     width: 220px;
+    
 }
 
-.navabar_search-icon {
+.navbar_search-icon {
     position: absolute;
-    left: 8px;
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
 }
 
 .navbar_search-input {
     width: 100%;
-    padding-left: 24px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    height: 28px;
+    padding-left: 36px; 
+    padding-top: 5px;
+    padding-bottom: 5px; 
+    height: 15px; 
+    line-height: 20px;
+    text-align: center;
+    font-size: 14px; 
+    background-color: white;
+    border: 1px solid black !important; 
+    border-radius: 0px !important;
 }
 
-/* Icons on the right */
 .navbar_icons {
     display: flex;
-    gap: 15px; /* Space between icons */
+    gap: 15px;
 }
 
 .navbar_link {
-    color: black; /* Ensuring the link color is black. Adjust as necessary. */
+    color: black; 
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .navbar_link:hover {
-    color: #c7c7c7; /* Changing the color slightly on hover for feedback. Adjust as necessary. */
+    color: #c7c7c7; 
 }
 
 .active-link {
-    color: #000; /* Ensuring the active link color is solid black. Adjust as necessary. */
+    color: #000; 
 }
