@@ -9,11 +9,12 @@
 
 .profile-header_stats {
     display: flex;
-    gap: 20px; /* Space between each stat */
+    gap: 20px; 
+    font: 400;
 }
 
 .profile-header_stats_text{
-    font-weight: 300;
+    font-weight: 500;
 }
 
 .profile-header_avatar{
@@ -29,4 +30,14 @@
     align-items: center;
     justify-content: space-between;
     height: 100%;
+}
+
+.profile-header_username{
+    font-weight: 500;
+    font-size: 20px;
+    color: #262626;
+}
+
+.profile-header_name{
+    font-weight: 700;
 }
