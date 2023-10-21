@@ -4,6 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart, faComment } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
+import {FiMessageCircle} from 'react-icons/fi'
 
 function FullPost({post, onClose, user, onPostDeleted}) {
     const [comments, setComments] = useState([])
@@ -184,7 +185,7 @@ function FullPost({post, onClose, user, onPostDeleted}) {
                                 <FontAwesomeIcon icon={isLiked? solidHeart : regularHeart} className={isLiked? 'FullPost_liked':''}/>
                             </button>
                             <button className='FullPost_icon_button' onClick={handleCommentIconClick}>
-                                <FontAwesomeIcon icon={faComment}/>
+                                <FiMessageCircle/>
                             </button>
                         </div>
                         <p>{likes} likes</p>

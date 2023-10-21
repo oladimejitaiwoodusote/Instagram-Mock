@@ -49,12 +49,12 @@
     padding-left: 36px; 
     padding-top: 5px;
     padding-bottom: 5px; 
-    height: 15px; 
+    height: 10px; 
     line-height: 20px;
     text-align: center;
     font-size: 14px; 
     background-color: white;
-    border: 1px solid black !important; 
+    border: 1px solid #ccc !important; 
     border-radius: 0px !important;
 }
 

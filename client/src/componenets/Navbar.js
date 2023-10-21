@@ -1,8 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import './Navbar.css'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSearch} from '@fortawesome/free-solid-svg-icons'
 import {GoHomeFill} from 'react-icons/go'
 import {CgAddR, CgProfile} from 'react-icons/cg'
 import {MdOutlineExplore} from 'react-icons/md'
