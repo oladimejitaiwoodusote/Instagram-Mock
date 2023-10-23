@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import './FullPost.css'
 import Avatar from '@mui/material/Avatar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as solidHeart, faComment } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import {FiMessageCircle} from 'react-icons/fi'
 

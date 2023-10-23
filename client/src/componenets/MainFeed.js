@@ -1,9 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Post from './Post'
+import './MainFeed.css'
+
 
 function MainFeed({currentUser}) {
+
+  const [posts, setPosts] = useState([])
+ 
+  /**Just to visiualize for now */
+  useEffect(()=>{
+      if (currentUser){
+      fetch(`/users_posts/${currentUser.id}`)
+      .then(response => response.json())
+      .then(data => {
+          setPosts(data)
+      })
+      }
+      else {
+      }
+      },[currentUser])
+
+  const dummy = posts.map(post => {
+    return <Post key={post.id} post={post}/>
+  })
+
   return (
-    <div>
-        {console.log(currentUser)}
+    <div className='MainFeed_wrapper'>
+      {dummy}
     </div>
   )
 }

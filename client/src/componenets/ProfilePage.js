@@ -4,6 +4,7 @@ import PostThumbnail from './PostThumbnail'
 import ProfileHeader from './ProfileHeader'
 import './ProfilePage.css'
 import FullPost from './FullPost'
+import Post from './Post'
 
 function ProfilePage({currentUser}) {
     const [posts, setPosts] = useState([])
