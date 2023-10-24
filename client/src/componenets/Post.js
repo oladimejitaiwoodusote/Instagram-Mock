@@ -51,7 +51,7 @@ function Post({post, user}) {
             alt={post.username}
             src={post.avatar}
             />
-        <h3>{post.username}</h3>
+        <h4>{post.username}</h4>
       </div>
       <img className='post_image' src={post.image}/>
       <h4 className='post_text'><strong>{post.username}</strong> {post.caption}</h4>
@@ -60,8 +60,7 @@ function Post({post, user}) {
         <form onSubmit={submitHandler}>
           <input placeholder='Enter comment...' name="comment" value={newComment} onChange={changeHandler}></input>
         </form>
-      </div>
-      
+      </div>      
     </div>
   )
 }

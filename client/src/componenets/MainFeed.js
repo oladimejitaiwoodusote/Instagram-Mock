@@ -10,10 +10,11 @@ function MainFeed({currentUser}) {
   /**Just to visiualize for now */
   useEffect(()=>{
       if (currentUser){
-      fetch(`/users_posts/${currentUser.id}`)
+      fetch(`/users_followee_posts/${currentUser.id}`)
       .then(response => response.json())
       .then(data => {
           setPosts(data)
+          console.log(1)
       })
       }
       else {
@@ -21,7 +22,7 @@ function MainFeed({currentUser}) {
       },[currentUser])
 
   const dummy = posts.map(post => {
-    return <Post key={post.id} post={post}/>
+    return <Post key={post.id} post={post} user={currentUser}/>
   })
 
   return (

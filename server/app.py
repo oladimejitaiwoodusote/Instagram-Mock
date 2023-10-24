@@ -64,6 +64,23 @@ def get_posts(id):
     post_dicts = [post.to_dict() for post in users_posts]
     return post_dicts, 201
 
+#Get Users Main Feed (Post of Users followed)
+@app.get('/users_followee_posts/<int:id>')
+def get_followee_posts(id):
+    user = User.query.where(User.id == id).first()
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    followees = user.following
+    followee_posts = []
+    for followee in followees:
+        for post in followee.posts:
+            followee_posts.append(post.to_dict())
+
+    #followee_posts.sort(key=lambda x: x['created_at'], reverse=True)
+    
+    return jsonify(followee_posts), 200
+
 #Get Posts comments
 @app.get('/comments/<int:id>')
 def get_comments(id):
@@ -116,7 +133,7 @@ def post_comment():
     comment = Comment(text=json["text"], user_id=json["user_id"], post_id=json["post_id"])
     db.session.add(comment)
     db.session.commit()
-    return comment.to_dict(), 201
+    return jsonify(comment.to_dict()), 201
 
 #Delete Post
 @app.delete('/delete_post/<int:post_id>')

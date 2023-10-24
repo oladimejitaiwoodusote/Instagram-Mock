@@ -1,8 +1,8 @@
 .post {
-   max-width: 500px;
    background-color: white;
    border: 1px solid lightgray;
    margin-bottom: 45px;
+   width: 470px;
 }
 
 .post_image {
@@ -21,7 +21,7 @@
 .post_header {
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 5px;
 }
 
 .post_avatar {
