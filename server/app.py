@@ -77,7 +77,7 @@ def get_followee_posts(id):
         for post in followee.posts:
             followee_posts.append(post.to_dict())
 
-    #followee_posts.sort(key=lambda x: x['created_at'], reverse=True)
+    followee_posts.sort(key=lambda x: x['created_at'], reverse=True)
     
     return jsonify(followee_posts), 200
 

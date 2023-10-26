@@ -170,7 +170,7 @@ input[type="text"] {
     border: none;
     cursor: pointer;
     color: #333;  /* Black color */
-    font-size: 1.5em; /* Adjust size as needed */
+    font-size: 1em; /* Adjust size as needed */
     padding: 0;
     margin: 0;
 }
@@ -179,6 +179,7 @@ input[type="text"] {
     stroke: #333;  /* Black outline */
     stroke-width: 2;  /* Adjust for desired thickness */
     fill: #fff;
+    font-size: 1.5em;
 }
 
 .FullPost_liked {

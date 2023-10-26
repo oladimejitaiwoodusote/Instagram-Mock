@@ -1,15 +1,14 @@
 .post {
    background-color: white;
-   border: 1px solid lightgray;
    margin-bottom: 45px;
    width: 470px;
 }
 
 .post_image {
     width: 100%;
-    object-fit: contain;
-    border-top: 1px solid lightgray;
-    border-bottom: 1px solid lightgray
+    height: 650px;
+    object-fit: cover;
+    border-radius: 0.5%;
 }
 
 .post_text {
@@ -21,7 +20,8 @@
 .post_header {
     display: flex;
     align-items: center;
-    padding: 5px;
+    padding-left: 5px;
+    font-size: 15px;
 }
 
 .post_avatar {
@@ -33,11 +33,30 @@
     padding: 5px;
 }
 
-.post_comment_section{
-    /* border: #000;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black; */
-    border: 1px solid lightgray
+.post_engagement{
+    display: flex;
+    flex-direction: column;
+}
+
+.post_engagement_icons{
+    display: flex;
+    justify-content: flex-start;
+    gap: 13px;
+}
+
+.post_icon_button{
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    font-size: 1.8em;
+    padding: 0;
+}
+
+.post_engagement p{
+    display: flex;
+    flex-direction: column;
+    margin: 0%;
+    margin-left: 0%;
+    font-size: 20px;
 }

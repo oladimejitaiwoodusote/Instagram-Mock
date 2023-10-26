@@ -86,7 +86,9 @@ class Post(db.Model):
             "image": self.image,
             "username": self.user.username,
             "avatar": self.user.avatar,
-            "user_id": self.user_id
+            "user_id": self.user_id,
+            "created_at": self.created_at
+
         }
 
 class Comment(db.Model):

@@ -7,7 +7,6 @@ function MainFeed({currentUser}) {
 
   const [posts, setPosts] = useState([])
  
-  /**Just to visiualize for now */
   useEffect(()=>{
       if (currentUser){
       fetch(`/users_followee_posts/${currentUser.id}`)

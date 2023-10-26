@@ -9,6 +9,7 @@ import Post from './Post'
 function ProfilePage({currentUser}) {
     const [posts, setPosts] = useState([])
     const [selectedPost, setSelectedPost] = useState(null)
+    
 
     useEffect(()=>{
         if (currentUser){
