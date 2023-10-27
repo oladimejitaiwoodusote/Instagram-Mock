@@ -9,7 +9,7 @@ import Post from './Post'
 function ProfilePage({currentUser}) {
     const [posts, setPosts] = useState([])
     const [selectedPost, setSelectedPost] = useState(null)
-    
+
 
     useEffect(()=>{
         if (currentUser){
@@ -25,7 +25,6 @@ function ProfilePage({currentUser}) {
 
     function handleThumbnailClick(post){
         setSelectedPost(post)
-        console.log(post)
     }
 
     const profile_posts_thumbnails = posts.map(post => {
@@ -51,7 +50,7 @@ function ProfilePage({currentUser}) {
                     {profile_posts_thumbnails}
                 </div>
                 {selectedPost? <FullPost onPostDeleted={handlePostDeleted} user={currentUser} post={selectedPost} onClose={handleCloseModal}/>:null}
-                {selectedPost? console.log(selectedPost):null}
+
             </div>
         )
     }

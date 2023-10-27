@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Post from './Post'
+import FullPost from './FullPost'
 import './MainFeed.css'
+
 
 
 function MainFeed({currentUser}) {
 
   const [posts, setPosts] = useState([])
+  const [selectedPost, setSelectedPost] = useState(null)
  
   useEffect(()=>{
       if (currentUser){
@@ -13,20 +16,29 @@ function MainFeed({currentUser}) {
       .then(response => response.json())
       .then(data => {
           setPosts(data)
-          console.log(1)
       })
       }
       else {
       }
       },[currentUser])
 
-  const dummy = posts.map(post => {
-    return <Post key={post.id} post={post} user={currentUser}/>
+
+  function handlePostClick(post){
+    setSelectedPost(post)
+    console.log(post)
+  }
+
+  function handleCloseModal(){
+    setSelectedPost(null);
+  }
+  const posts_feed = posts.map(post => {
+    return <Post key={post.id} onClick={()=> handlePostClick(post)} post={post} user={currentUser}/>
   })
 
   return (
     <div className='MainFeed_wrapper'>
-      {dummy}
+      {posts_feed}
+      {selectedPost? <FullPost post={selectedPost} user={currentUser} onClose={handleCloseModal}/>:null}
     </div>
   )
 }

@@ -6,7 +6,7 @@ import {FiMessageCircle} from 'react-icons/fi'
 import {FcLike} from 'react-icons/fc'
 
 
-function Post({post, user}) {
+function Post({post, user, onClick}) {
   const [comments, setComments] = useState([])
   const [newComment, setNewComment] = useState("")
   const [likes, setLikes] = useState(post.likes || 0)
@@ -15,7 +15,7 @@ function Post({post, user}) {
   useEffect(()=> {
     fetch(`/comments/${post.id}`)
     .then(response => response.json())
-    .then(data => setComments(data))
+    .then(data => setComments(data.length))
   },[post.id])
 
   useEffect(()=> {
@@ -43,11 +43,11 @@ function Post({post, user}) {
     })
     }
 
-  const commentSection = comments.map(comment => {
-    return <h4 className="post_comment" key ={comment.id}>
-              <strong>{comment.user}</strong> {comment.text}
-          </h4>
-  })
+  // const commentSection = comments.map(comment => {
+  //   return <h4 className="post_comment" key ={comment.id}>
+  //             <strong>{comment.user}</strong> {comment.text}
+  //         </h4>
+  // })
 
   function submitHandler(e){
     e.preventDefault()
@@ -74,6 +74,8 @@ function Post({post, user}) {
     setNewComment(e.target.value)
   }
   
+
+
   return (
     <div className="post">
       <div className='post_header'>
@@ -88,20 +90,23 @@ function Post({post, user}) {
       <div className="post_engagement">
           <div className="post_engagement_icons">
               <button className='post_icon_button' onClick={handleLikeClick}>
-                  {console.log(isLiked)}
                   {isLiked? <FcLike/>: <AiOutlineHeart/>}
               </button>
               <button className='post_icon_button'>
                   <FiMessageCircle/>
               </button>
           </div>
-          <p>{likes} likes</p>
+          <p >{likes} likes </p>
+          <div className="post_caption_container">
+            <span className="post_username">{post.username}</span>
+            <span className="post_caption">  {post.caption}</span>
+          </div>
       </div>
-      <h4 className='post_text'><strong>{post.username}</strong> {post.caption}</h4>
       <div className ="post_comment_section">
-        {commentSection}
+        {/* {commentSection} */}
+        {comments == 0? null: <p onClick={onClick}>View all {comments} comments</p>}
         <form onSubmit={submitHandler}>
-          <input placeholder='Add a comment...' name="comment" value={newComment} onChange={changeHandler}></input>
+          <input className="post_comment_input"placeholder='Add a comment...' name="comment" value={newComment} onChange={changeHandler}></input>
         </form>
       </div>      
     </div>

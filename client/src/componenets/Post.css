@@ -9,12 +9,23 @@
     height: 650px;
     object-fit: cover;
     border-radius: 0.5%;
+    border: 1px solid #d3d3d3;
 }
 
-.post_text {
-    font-weight: normal;
-    padding: 10px;
-    text-align: left;
+.post_caption_container{
+    display: inline-block;
+    margin-right: 30px;
+    margin-top: 5px;
+}
+
+.post_username{
+    font-size: 14px;
+    font-weight: 650;    
+}
+
+.post_caption{
+    font-size: 14px;
+    font-weight: 450;
 }
 
 .post_header {
@@ -26,11 +37,6 @@
 
 .post_avatar {
     margin-right: 10px;
-}
-
-.post_comment{
-    font-weight: normal;
-    padding: 5px;
 }
 
 .post_engagement{
@@ -58,5 +64,13 @@
     flex-direction: column;
     margin: 0%;
     margin-left: 0%;
-    font-size: 20px;
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.post_comment_section p{
+    margin-top: 1.5%;
+    font-size: 14px;
+    font-weight: 350;
+    color: gray;
 }
