@@ -43,12 +43,6 @@ function Post({post, user, onClick}) {
     })
     }
 
-  // const commentSection = comments.map(comment => {
-  //   return <h4 className="post_comment" key ={comment.id}>
-  //             <strong>{comment.user}</strong> {comment.text}
-  //         </h4>
-  // })
-
   function submitHandler(e){
     e.preventDefault()
     const comment = {
@@ -66,15 +60,28 @@ function Post({post, user, onClick}) {
       body: JSON.stringify(comment)
     })
     .then(response => response.json())
-    .then(comment => setComments([...comments, comment]))
+    .then(comment => setComments(comments + 1))
     setNewComment("")
   }
 
   function changeHandler(e){
-    setNewComment(e.target.value)
+    if (e.key == 'Enter' && !e.shiftKey){
+      e.preventDefault()
+      if (newComment.trim() !== ""){
+        submitHandler(e)
+      }
+    }
+    else{
+      setNewComment(e.target.value)
+      autoResize(e.target)
+    }
   }
   
+  function autoResize(e){
+    e.style.height = 'auto';
+    e.style.height = (e.scrollHeight) + 'px';
 
+  }
 
   return (
     <div className="post">
@@ -106,7 +113,16 @@ function Post({post, user, onClick}) {
         {/* {commentSection} */}
         {comments == 0? null: <p onClick={onClick}>View all {comments} comments</p>}
         <form onSubmit={submitHandler}>
-          <input className="post_comment_input"placeholder='Add a comment...' name="comment" value={newComment} onChange={changeHandler}></input>
+          <div className='post_comment_form'>
+            <textarea className="post_comment_input" 
+                      placeholder='Add a comment...' 
+                      name="comment" 
+                      value={newComment} 
+                      onChange={(e)=> {changeHandler(e); autoResize(e.target)}} 
+                      rows="1"
+                      onKeyDown={changeHandler}></textarea>
+            {newComment?  <button className="post_comment_button" type="submit">Post</button>: null}           
+          </div>
         </form>
       </div>      
     </div>

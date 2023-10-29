@@ -68,9 +68,43 @@
     font-weight: 650;
 }
 
+
 .post_comment_section p{
     margin-top: 1.5%;
+    margin-bottom: 5px;
     font-size: 14px;
     font-weight: 350;
     color: gray;
+    cursor: pointer;
+}
+
+.post_comment_section form{
+    margin-top: 0px;
+}
+
+.post_comment_input{
+    border: 0px;
+    padding-top: 0px;
+    line-height: 20px;
+    width: 85%;
+    resize: none;
+    overflow: hidden;
+}
+
+.post_comment_input:focus{
+    outline:none;
+}
+
+.post_comment_button{
+    color: #3897f0;
+    background-color: transparent;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.post_comment_form{
+    display: flex;
 }
