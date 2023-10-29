@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import Avatar from '@mui/material/Avatar';
 import './Post.css'
 import {AiOutlineHeart} from 'react-icons/ai'
@@ -11,6 +11,8 @@ function Post({post, user, onClick}) {
   const [newComment, setNewComment] = useState("")
   const [likes, setLikes] = useState(post.likes || 0)
   const [isLiked, setIsLiked] = useState(false)
+
+  const commentInputRef = useRef(null)
 
   useEffect(()=> {
     fetch(`/comments/${post.id}`)
@@ -83,6 +85,10 @@ function Post({post, user, onClick}) {
 
   }
 
+  function handleCommentIconClick(){
+    commentInputRef.current.focus()
+  }
+
   return (
     <div className="post">
       <div className='post_header'>
@@ -99,7 +105,7 @@ function Post({post, user, onClick}) {
               <button className='post_icon_button' onClick={handleLikeClick}>
                   {isLiked? <FcLike/>: <AiOutlineHeart/>}
               </button>
-              <button className='post_icon_button'>
+              <button className='post_icon_button' onClick={handleCommentIconClick}>
                   <FiMessageCircle/>
               </button>
           </div>
@@ -120,7 +126,8 @@ function Post({post, user, onClick}) {
                       value={newComment} 
                       onChange={(e)=> {changeHandler(e); autoResize(e.target)}} 
                       rows="1"
-                      onKeyDown={changeHandler}></textarea>
+                      onKeyDown={changeHandler}
+                      ref={commentInputRef}></textarea>
             {newComment?  <button className="post_comment_button" type="submit">Post</button>: null}           
           </div>
         </form>

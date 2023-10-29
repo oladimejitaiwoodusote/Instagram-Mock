@@ -74,6 +74,11 @@ function FullPost({post, onClose, user, onPostDeleted}) {
 
     function changeHandler(e){
         setNewComment(e.target.value)
+
+        const textarea = commentInputRef.current;
+        textarea.style.height = 'auto';
+        textarea.style.height = `${textarea.scrollHeight}px`;
+        textarea.scollTop = textarea.scrollHeight;
     }
 
     function handleLikeClick(){
@@ -193,10 +198,10 @@ function FullPost({post, onClose, user, onPostDeleted}) {
                 </div>
                 <hr className="FullPost_separator"/>
                 <form onSubmit={submitHandler}>
-                    <div className="FullPost_comment_section">
-                            <textarea placeholder='Add a comment' value={newComment} onChange={changeHandler} ref={commentInputRef}/>
-                            <button type="submit" className="FullPost_comment_button">Post</button>
-                    </div>
+                        <div className="FullPost_comment_section">
+                                <input placeholder='Add a comment...' value={newComment} onChange={changeHandler} ref={commentInputRef}/>
+                                <button type="submit" className="FullPost_comment_button">Post</button>
+                        </div>
                 </form>
             </div>
         </div>

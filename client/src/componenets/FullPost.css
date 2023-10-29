@@ -77,12 +77,7 @@
     border-top: 0px solid grey;
 }
 
-textarea[type="text"] {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    margin-top: 20px;
-}
+
 
 .FullPost_close_button {
     position: absolute;
@@ -190,7 +185,6 @@ textarea[type="text"] {
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Distributes space between comments and engagement section */    display: flex;
-    flex-direction: column;
     height: 75%;
 }
 
@@ -200,24 +194,22 @@ textarea[type="text"] {
     max-height: 100%;
 }
 
-textarea[type="text"] {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    margin-top: 10px;
-    width: 100%; /* Ensures the input box takes the full width */
-}
+
 
 .FullPost_comment_section {
+    margin-top: 15px;
     display: flex;
+    width: 100%;
 }
 
-.FullPost_comment_section input[type='text']{
+.FullPost_comment_section input{
     flex: 1;
     margin-right: 10px;
+    width: 100%;
+    border: 0;
 }
 
-.FullPost_comment_section input[type='text']:focus{
+.FullPost_comment_section input:focus{
     outline: none;
 }
 
@@ -299,3 +291,11 @@ textarea[type="text"] {
     cursor: pointer;
     transform: background-color 0.3s ease;
 }
+
+.FullPost_textarea_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
