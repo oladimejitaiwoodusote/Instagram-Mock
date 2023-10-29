@@ -194,8 +194,8 @@ function FullPost({post, onClose, user, onPostDeleted}) {
                 <hr className="FullPost_separator"/>
                 <form onSubmit={submitHandler}>
                     <div className="FullPost_comment_section">
-                            <input type="text" placeholder="Add a comment..." value={newComment} onChange={changeHandler} ref={commentInputRef} />
-                            <button type="submit" className="FullPost_comment_button">POST</button>
+                            <textarea placeholder='Add a comment' value={newComment} onChange={changeHandler} ref={commentInputRef}/>
+                            <button type="submit" className="FullPost_comment_button">Post</button>
                     </div>
                 </form>
             </div>

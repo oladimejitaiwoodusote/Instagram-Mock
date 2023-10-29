@@ -1,6 +1,6 @@
 .post {
    background-color: white;
-   margin-bottom: 45px;
+   margin-bottom: 5px;
    width: 470px;
 }
 
@@ -107,4 +107,10 @@
 
 .post_comment_form{
     display: flex;
+}
+
+.post_separator{
+    margin-top: 15px;
+    border-width: thin;
+    border-color: #e8e8e8;
 }

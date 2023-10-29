@@ -124,7 +124,8 @@ function Post({post, user, onClick}) {
             {newComment?  <button className="post_comment_button" type="submit">Post</button>: null}           
           </div>
         </form>
-      </div>      
+      </div>    
+      <hr className="post_separator"/>  
     </div>
   )
 }
