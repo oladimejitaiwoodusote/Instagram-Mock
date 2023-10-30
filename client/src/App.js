@@ -62,10 +62,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Login attempLogin={handleLogin}/>}/>
         <Route path="/signup" element={<Signup attemptSignup={handleSignup} currentUser={currentUser}/>}/>
-        <Route path="/profile_page" element={<ProfilePage currentUser={currentUser}/>}/>
+        <Route path="/profile_page/:userId" element={<ProfilePage currentUser={currentUser}/>}/>
         <Route path="/main_feed" element={<MainFeed currentUser={currentUser}/>}/>
         <Route path="/image_upload" element={<ImageUpload currentUser={currentUser}/>}/>
-
       </Routes>
     </>
   );

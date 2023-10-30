@@ -1,19 +1,24 @@
 import React, {useState, useEffect} from 'react'
-// import Post from './Post'
+import {useParams} from 'react-router-dom'
 import PostThumbnail from './PostThumbnail'
 import ProfileHeader from './ProfileHeader'
 import './ProfilePage.css'
 import FullPost from './FullPost'
-import Post from './Post'
 
-function ProfilePage({currentUser}) {
+function ProfilePage2({currentUser}) {
+    const {userId} = useParams()
+    const [profileUser, setProfileUser] = useState(null)
     const [posts, setPosts] = useState([])
     const [selectedPost, setSelectedPost] = useState(null)
 
 
     useEffect(()=>{
+        fetch(`/user_profile/${userId}`)
+            .then(response => response.json())
+            .then(data => setProfileUser(data))
+
         if (currentUser){
-        fetch(`/users_posts/${currentUser.id}`)
+        fetch(`/users_posts/${userId}`)
         .then(response => response.json())
         .then(data => {
             setPosts(data)
@@ -44,7 +49,7 @@ function ProfilePage({currentUser}) {
     if (currentUser){
         return (
             <div>
-                <ProfileHeader user={currentUser}/>
+                <ProfileHeader user={profileUser}/>
                 <hr className='ProfilePage_divider'/>
                 <div className="ProfilePage-posts_grid">
                     {profile_posts_thumbnails}
@@ -60,4 +65,4 @@ function ProfilePage({currentUser}) {
     }
 }
 
-export default ProfilePage
+export default ProfilePage2

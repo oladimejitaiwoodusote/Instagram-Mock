@@ -1,5 +1,4 @@
 import React from 'react'
-import { Avatar } from '@mui/material'
 import './ProfileHeader.css'
 import CustomAvatar from './CustomAvatar'
 

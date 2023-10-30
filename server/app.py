@@ -33,6 +33,14 @@ def check_session():
     else:
         return {"message": "Not logged in"}, 401
 
+#Get user profile
+@app.get('/user_profile/<int:id>')
+def get_user(id):
+    user = User.query.get(id)
+    if user:
+        return user.to_dict(), 200
+    else:
+        return {"message": "User not found"}, 401
 
 #Create account
 @app.post('/signup')
