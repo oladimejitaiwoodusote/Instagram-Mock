@@ -40,15 +40,14 @@
 .navbar_search-icon {
     position: absolute;
     left: 10px;
-    top:45%;
+    top:30%;
 }
 
 .navbar_search-input {
     width: 100%;
-    padding-left: 36px; 
     padding-top: 5px;
     padding-bottom: 5px; 
-    height: 10px; 
+    height: 15px; 
     line-height: 20px;
     text-align: center;
     font-size: 14px; 
