@@ -8,14 +8,16 @@ import {BiMessageRoundedDetail} from 'react-icons/bi'
 import {AiOutlineInstagram, AiOutlineSearch} from 'react-icons/ai'
 
 
-function Navbar() {
+function Navbar({currentUser}) {
   return (
     <div className="navbar_wrapper">
       <nav className="navbar">
         <div className="navbar_logo-wrapper">
           {/* Replace with your actual logo */}
-          <span className="navbar_instagram-logo">Instagram-Clone</span>
-          <AiOutlineInstagram/>
+          <NavLink to="/main_feed" style={{textDecoration:'none', color: 'inherit'}}>
+              <span className="navbar_instagram-logo">Instagram-Clone</span>
+              <AiOutlineInstagram/>
+          </NavLink>
         </div>
         <div className='navbar_search'>
             <AiOutlineSearch className="navbar_search-icon"/>
@@ -28,7 +30,7 @@ function Navbar() {
             <NavLink className="navbar_link" to="/image_upload" activeClassName="active-link">
                 <CgAddR/>
             </NavLink>
-            <NavLink className="navbar_link" to="/profile_page" activeClassName="active-link">
+            <NavLink className="navbar_link" to={`/profile_page/${currentUser.id}`} activeClassName="active-link">
                 <CgProfile/>
             </NavLink>
             <NavLink className="navbar_link" to="/discoveries" activeClassName="active-link">

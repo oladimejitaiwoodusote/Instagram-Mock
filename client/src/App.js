@@ -58,7 +58,7 @@ function App() {
 
   return (
     <>
-      {currentUser? <Navbar/>:null}
+      {currentUser? <Navbar currentUser={currentUser}/>:null}
       <Routes>
         <Route path="/" element={<Login attempLogin={handleLogin}/>}/>
         <Route path="/signup" element={<Signup attemptSignup={handleSignup} currentUser={currentUser}/>}/>

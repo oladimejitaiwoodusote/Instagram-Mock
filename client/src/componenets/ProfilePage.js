@@ -5,19 +5,19 @@ import ProfileHeader from './ProfileHeader'
 import './ProfilePage.css'
 import FullPost from './FullPost'
 
-function ProfilePage2({currentUser}) {
+function ProfilePage({currentUser}) {
     const {userId} = useParams()
     const [profileUser, setProfileUser] = useState(null)
     const [posts, setPosts] = useState([])
     const [selectedPost, setSelectedPost] = useState(null)
 
 
-    useEffect(()=>{
+    useEffect(()=>{    
         fetch(`/user_profile/${userId}`)
             .then(response => response.json())
             .then(data => setProfileUser(data))
-
         if (currentUser){
+        
         fetch(`/users_posts/${userId}`)
         .then(response => response.json())
         .then(data => {
@@ -46,7 +46,7 @@ function ProfilePage2({currentUser}) {
     }
 
 
-    if (currentUser){
+    if (currentUser && profileUser){
         return (
             <div>
                 <ProfileHeader user={profileUser}/>
@@ -65,4 +65,4 @@ function ProfilePage2({currentUser}) {
     }
 }
 
-export default ProfilePage2
+export default ProfilePage

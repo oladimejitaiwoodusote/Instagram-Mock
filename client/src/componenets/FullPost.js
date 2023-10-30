@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
+import {Link} from 'react-router-dom'
 import './FullPost.css'
 import Avatar from '@mui/material/Avatar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -42,7 +43,9 @@ function FullPost({post, onClose, user, onPostDeleted}) {
         return <div className="FullPost_username_caption">
                     <Avatar src={comment.avatar} alt={comment.user}/>
                     <div className="FullPost_caption_container">
-                        <span className='FullPost_username'>{comment.user}</span>
+                        <Link to={`/profile_page/${comment.user_id}`} style={{textDecoration:'none', color: 'inherit'}}>
+                            <span className='FullPost_username'>{comment.user}</span>
+                        </Link>
                         <p className='FullPost_caption'>{comment.text}</p>
                     </div>
                </div>
@@ -150,7 +153,9 @@ function FullPost({post, onClose, user, onPostDeleted}) {
                 <div className="FullPost_header">
                     <div className="FullPost_user_info">
                         <Avatar src={post.avatar} alt={post.username}/>
-                        <p>{post.username}</p>
+                        <Link to ={`/profile_page/${post.user_id}`} style={{textDecoration:'none', color: 'inherit'}}>                    
+                            <p>{post.username}</p>
+                        </Link>
                     </div>
                     {post.user_id === user.id && (
                         <div className="FullPost_options">
@@ -168,7 +173,9 @@ function FullPost({post, onClose, user, onPostDeleted}) {
                 <div className="FullPost_username_caption">
                     <Avatar src={post.avatar} alt={post.username}/>
                     <div className="FullPost_caption_container">
-                        <span className='FullPost_username'>{post.username}</span>
+                        <Link to ={`/profile_page/${post.user_id}`} style={{textDecoration:'none', color: 'inherit'}}>
+                            <span className='FullPost_username'>{post.username}</span>
+                        </Link>
                         {
                             editMode?
                             <form onSubmit={handleEditSubmit}>

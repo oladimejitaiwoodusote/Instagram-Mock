@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
+import {Link} from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
 import './Post.css'
 import {AiOutlineHeart} from 'react-icons/ai'
@@ -97,7 +98,9 @@ function Post({post, user, onClick}) {
             alt={post.username}
             src={post.avatar}
             />
-        <h4>{post.username}</h4>
+        <Link to={`/profile_page/${post.user_id}`} style={{textDecoration:'none', color: 'inherit'}}>
+            <h4>{post.username}</h4>
+        </Link>
       </div>
       <img className='post_image' src={post.image}/>
       <div className="post_engagement">
@@ -111,7 +114,9 @@ function Post({post, user, onClick}) {
           </div>
           <p >{likes} likes </p>
           <div className="post_caption_container">
-            <span className="post_username">{post.username}</span>
+            <Link to={`/profile_page/${post.user_id}`} style={{textDecoration:'none', color: 'inherit'}}>
+                <span className="post_username">{post.username}</span>
+            </Link>
             <span className="post_caption">  {post.caption}</span>
           </div>
       </div>
