@@ -26,7 +26,11 @@ function ProfilePage({currentUser}) {
          }
         else {
         }
-    },[currentUser])
+    },[currentUser, userId])
+
+    useEffect(()=> {
+        setSelectedPost(null)
+    }, [userId])
 
     function handleThumbnailClick(post){
         setSelectedPost(post)
