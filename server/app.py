@@ -180,7 +180,7 @@ def is_following(user_id, profile_id):
         return jsonify({"message": False}),201
 
 #Follow User
-@app.get('/follow/<int:user_id>/<int:profile_id>')
+@app.post('/follow/<int:user_id>/<int:profile_id>')
 def follow(user_id, profile_id):
     user = User.query.get(user_id)
     following = user.following
@@ -190,7 +190,7 @@ def follow(user_id, profile_id):
     return jsonify({'message': "Followed"}), 201
 
 #Unfollow User
-@app.get('/unfollow/<int:user_id>/<int:profile_id>')
+@app.delete('/unfollow/<int:user_id>/<int:profile_id>')
 def unfollow(user_id, profile_id):
     user = User.query.get(user_id)
     following = user.following

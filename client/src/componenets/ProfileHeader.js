@@ -13,23 +13,22 @@ function ProfileHeader({profileUser, currentUser}) {
   },[])
 
   function handleFollowToggle(){
+    const method = isFollowing? 'DELETE': 'POST'
+    const endpoint = isFollowing? `/unfollow/${currentUser.id}/${profileUser.id}`: `/follow/${currentUser.id}/${profileUser.id}`
+
+    fetch(endpoint, {
+      method: method
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+
     if (isFollowing){
-      fetch(`/unfollow/${currentUser.id}/${profileUser.id}`)
-      .then(response => response.json())
-      .then(data => console.log(data))
-
-      profileUser.followersCount -= 1
+      profileUser.followersCount -= 1;
+    } else {
+      profileUser.followersCount += 1;
     }
 
-    else {
-      fetch(`/follow/${currentUser.id}/${profileUser.id}`)
-      .then(response => response.json())
-      .then(data => console.log(data))
-
-      profileUser.followersCount += 1
-    }
-
-    setIsFollowing(!isFollowing)
+    setIsFollowing(!isFollowing);
   }
 
   return (
