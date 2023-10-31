@@ -53,7 +53,7 @@ function ProfilePage({currentUser}) {
     if (currentUser && profileUser){
         return (
             <div>
-                <ProfileHeader user={profileUser}/>
+                <ProfileHeader profileUser={profileUser} currentUser={currentUser}/>
                 <hr className='ProfilePage_divider'/>
                 <div className="ProfilePage-posts_grid">
                     {profile_posts_thumbnails}

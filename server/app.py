@@ -167,6 +167,38 @@ def edit_post(id):
     db.session.commit()
     return jsonify(post.to_dict()), 200
 
+#Checking if user is following prfile
+@app.get('/is_following/<int:user_id>/<int:profile_id>')
+def is_following(user_id, profile_id):
+    user = User.query.get(user_id)
+    followings = user.following
+    profile = User.query.get(profile_id)
+
+    if profile in followings:
+        return jsonify({'message': True}), 201
+    else:
+        return jsonify({"message": False}),201
+
+#Follow User
+@app.get('/follow/<int:user_id>/<int:profile_id>')
+def follow(user_id, profile_id):
+    user = User.query.get(user_id)
+    following = user.following
+    profile_user = User.query.get(profile_id)
+    following.append(profile_user)
+    db.session.commit()
+    return jsonify({'message': "Followed"}), 201
+
+#Unfollow User
+@app.get('/unfollow/<int:user_id>/<int:profile_id>')
+def unfollow(user_id, profile_id):
+    user = User.query.get(user_id)
+    following = user.following
+    profile_user = User.query.get(profile_id)
+    following.remove(profile_user)
+    db.session.commit()
+    return jsonify({'message': "Unfollowed"}), 201
+
 # #Upload Image to Bucket
 @app.post('/image_upload')
 def upload_image():
