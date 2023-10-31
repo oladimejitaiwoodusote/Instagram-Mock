@@ -41,3 +41,42 @@
 .profile-header_name{
     font-weight: 700;
 }
+
+.profile-header-following-button{
+    color: white;
+    background-color: #3897f0;
+}
+
+.profile-header-follow-button{
+    color: white;
+    background-color: #3897f0;
+    cursor: pointer;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    border: 1px;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.profile-header-following-button{
+    color: black;
+    background: lightgray;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 20px;
+    border: 1px;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-left: 20px;
+
+
+}
+
+.profile-header_action{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

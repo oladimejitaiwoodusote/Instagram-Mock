@@ -35,8 +35,13 @@ function ProfileHeader({profileUser, currentUser}) {
     <div className='profile-header'>
         <CustomAvatar src={profileUser.avatar} alt={profileUser.username}/>
         <div className='profile-header_info'>
-            <h2 className="profile-header_username">{profileUser.username}</h2>
-            {isFollowing? <button onClick={handleFollowToggle}>Following</button>: <button onClick={handleFollowToggle}>Follow</button>}
+            <div className='profile-header_action'>
+              <h2 className="profile-header_username">{profileUser.username}</h2>
+              {isFollowing
+              ? <button className="profile-header-following-button" onClick={handleFollowToggle}>Following</button>
+              : <button className="profile-header-follow-button" onClick={handleFollowToggle}>Follow</button>
+              }
+            </div>
             {console.log(isFollowing)}
             <div className="profile-header_stats">
                 <span><strong>{profileUser.postsCount} <span className="profile-header_stats_text">posts</span></strong></span>
