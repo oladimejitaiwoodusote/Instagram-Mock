@@ -6,6 +6,7 @@ from flask_bcrypt import Bcrypt
 import os
 from werkzeug.utils import secure_filename
 from google.cloud import storage
+import random
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -94,6 +95,30 @@ def get_followee_posts(id):
     followee_posts.sort(key=lambda x: x['created_at'], reverse=True)
     
     return jsonify(followee_posts), 200
+
+#Get Users Discovery Page (Post of Users not followed)
+@app.get('/user_discovery/<int:id>')
+def get_discover_posts(id):
+    user = User.query.where(User.id == id).first()
+    if not user:
+        return jsonify({"error": "User not found"})
+
+
+    followees = user.following
+    all_users = User.query.where(User.id != id).all()
+    discoveries = []
+    for user in all_users:
+        if user not in followees:
+            discoveries.append(user)
+
+    discovery_posts = []
+    for user in discoveries:
+        for post in user.posts:
+            discovery_posts.append(post.to_dict())
+
+    random.shuffle(discovery_posts)
+
+    return jsonify(discovery_posts), 200
 
 #Get Posts comments
 @app.get('/comments/<int:id>')

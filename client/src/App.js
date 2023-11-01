@@ -8,6 +8,7 @@ import ProfilePage from './componenets/ProfilePage';
 import MainFeed from './componenets/MainFeed';
 import Navbar from './componenets/Navbar';
 import ImageUpload from './componenets/ImageUpload';
+import DiscoverPage from './componenets/DiscoverPage';
 
 function App() {
   const [currentUser, setUser] = useState(null)
@@ -87,6 +88,7 @@ function App() {
         <Route path="/profile_page/:userId" element={<ProfilePage currentUser={currentUser}/>}/>
         <Route path="/main_feed" element={<MainFeed currentUser={currentUser}/>}/>
         <Route path="/image_upload" element={<ImageUpload currentUser={currentUser}/>}/>
+        <Route path="/discover_page" element={<DiscoverPage currentUser={currentUser}/>}/>
       </Routes>
     </>
   );

@@ -45,7 +45,6 @@ function ProfileHeader({profileUser, currentUser}) {
                 : <button className="profile-header-follow-button" onClick={handleFollowToggle}>Follow</button>
               )}
             </div>
-            {console.log(isFollowing)}
             <div className="profile-header_stats">
                 <span><strong>{profileUser.postsCount} <span className="profile-header_stats_text">posts</span></strong></span>
                 <span><strong>{profileUser.followersCount} <span className="profile-header_stats_text">followers</span></strong></span>

@@ -14,6 +14,10 @@ function Navbar({currentUser, logout, users}){
     user.username.toLowerCase().includes(search.toLowerCase())
     );
 
+  function resetSearch(){
+    setSearch("")
+  }
+
   return (
     <div className="navbar_wrapper">
       <nav className="navbar">
@@ -38,7 +42,7 @@ function Navbar({currentUser, logout, users}){
             <NavLink className="navbar_link" to={`/profile_page/${currentUser.id}`} activeClassName="active-link">
                 <CgProfile/>
             </NavLink>
-            <NavLink className="navbar_link" to="/discoveries" activeClassName="active-link">
+            <NavLink className="navbar_link" to="/discover_page" activeClassName="active-link">
                 <MdOutlineExplore/>
             </NavLink>
             <div className="navbar_link" activeClassName="active-link">
@@ -50,7 +54,7 @@ function Navbar({currentUser, logout, users}){
              {console.log(search)}
              {console.log(users)}
              {filteredUsers.map(user => {
-              return <UserProfilePreview key={user.id} user={user}/>
+              return <UserProfilePreview key={user.id} user={user} resetSearch={resetSearch}/>
              }
              )}
           </div>

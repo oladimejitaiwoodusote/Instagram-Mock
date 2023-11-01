@@ -1,0 +1,11 @@
+.discover_page_grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:10px;
+    width: 60%;
+    margin: 20px auto;
+}
+
+.discover_line_breaker{
+    width: 60%;
+}
