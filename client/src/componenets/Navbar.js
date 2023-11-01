@@ -8,9 +8,9 @@ import {BiMessageRoundedDetail} from 'react-icons/bi'
 import {AiOutlineInstagram, AiOutlineSearch, AiOutlineLogout} from 'react-icons/ai'
 
 
-function Navbar({currentUser}) {
+function Navbar({currentUser, logout}) {
 
-  
+
 
   return (
     <div className="navbar_wrapper">
@@ -39,9 +39,9 @@ function Navbar({currentUser}) {
             <NavLink className="navbar_link" to="/discoveries" activeClassName="active-link">
                 <MdOutlineExplore/>
             </NavLink>
-            <NavLink className="navbar_link" to="/logout" activeClassName="active-link">
-                <AiOutlineLogout/>
-            </NavLink>
+            <div className="navbar_link" activeClassName="active-link">
+                <AiOutlineLogout onClick={logout}/>
+            </div>
         </div>
         {/* You can include other navigation links/icons here as needed */}
       </nav>

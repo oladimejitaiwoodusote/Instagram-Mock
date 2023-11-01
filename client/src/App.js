@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import Login from './componenets/Login';
 import './App.css';
 import {Routes, Route} from 'react-router-dom'
@@ -11,6 +12,7 @@ import ImageUpload from './componenets/ImageUpload';
 
 function App() {
   const [currentUser, setUser] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(()=> {
     fetch('/check_session')
@@ -56,9 +58,24 @@ function App() {
     })
   }
 
+  function handleLogout(){
+    fetch('/logout',{
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.status === 204) {
+          setUser(null)
+          navigate('/')
+      }
+    })
+    .catch(error => {
+      console.error("Error during logout: ", error);
+    });
+  }
+
   return (
     <>
-      {currentUser? <Navbar currentUser={currentUser}/>:null}
+      {currentUser? <Navbar logout={handleLogout} currentUser={currentUser}/>:null}
       <Routes>
         <Route path="/" element={<Login attempLogin={handleLogin} currentUser={currentUser}/>}/>
         <Route path="/signup" element={<Signup attemptSignup={handleSignup} currentUser={currentUser}/>}/>

@@ -64,6 +64,12 @@ def login():
     else:
         return {"message": "Invalid username or password"}, 401
 
+#Logout
+@app.delete('/logout')
+def logout():
+    session.pop('user_id')
+    return {}, 204
+
 #Get Users Posts based on users id
 @app.get('/users_posts/<int:id>')
 def get_posts(id):
