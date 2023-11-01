@@ -23,9 +23,15 @@ function Signup({attemptSignup, currentUser}) {
         attemptSignup(formData)
     }
 
-    // useEffect(()=> {
-    //     navigate('/profile_page')
-    // })
+    useEffect(()=> {
+        if (currentUser){
+            navigate('/main_feed')
+        }
+    })
+
+    function clickHandler(){
+        navigate('/')
+    }
 
   return (
     <div className = 'signup-container'> 
@@ -42,7 +48,7 @@ function Signup({attemptSignup, currentUser}) {
         </div>  
         <div className='signup-login-only'>
             <p className='signup-login-text'> Have an account?
-                <button className='signup-login-button'>Log in</button>
+                <button className='signup-login-button' onClick={clickHandler}>Log in</button>
             </p>
         </div>
     </div>

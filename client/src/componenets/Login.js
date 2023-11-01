@@ -1,14 +1,22 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Login.css'
 
-function Login({attempLogin}) {
+function Login({attempLogin, currentUser}) {
 
+    const navigate = useNavigate()
     const [formData, setForm] = useState(
         {
             username: "",
             password: ""
         }
     )
+
+    useEffect(()=> {
+        if(currentUser) {
+            navigate('/main_feed')
+        }
+    })
     
     function changeHandler(e){
         setForm({...formData, [e.target.name]: e.target.value})
@@ -17,6 +25,10 @@ function Login({attempLogin}) {
     function submitHandler(e){
         e.preventDefault()
         attempLogin(formData)
+    }
+
+    function clickHandler(e){
+        navigate("/signup")
     }
 
   return (
@@ -31,7 +43,7 @@ function Login({attempLogin}) {
         </div>
         <div className='login-signup-only'>
             <p className='login-signup-text'> Don't have an account?
-                <button className='login-signup-button'>Sign up</button>
+                <button onClick={clickHandler} className='login-signup-button'>Sign up</button>
             </p>
 
         </div>

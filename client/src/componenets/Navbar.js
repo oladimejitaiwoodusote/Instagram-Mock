@@ -5,10 +5,13 @@ import {GoHomeFill} from 'react-icons/go'
 import {CgAddR, CgProfile} from 'react-icons/cg'
 import {MdOutlineExplore} from 'react-icons/md'
 import {BiMessageRoundedDetail} from 'react-icons/bi'
-import {AiOutlineInstagram, AiOutlineSearch} from 'react-icons/ai'
+import {AiOutlineInstagram, AiOutlineSearch, AiOutlineLogout} from 'react-icons/ai'
 
 
 function Navbar({currentUser}) {
+
+  
+
   return (
     <div className="navbar_wrapper">
       <nav className="navbar">
@@ -36,8 +39,8 @@ function Navbar({currentUser}) {
             <NavLink className="navbar_link" to="/discoveries" activeClassName="active-link">
                 <MdOutlineExplore/>
             </NavLink>
-            <NavLink className="navbar_link" to="/message" activeClassName="active-link">
-                <BiMessageRoundedDetail/>
+            <NavLink className="navbar_link" to="/logout" activeClassName="active-link">
+                <AiOutlineLogout/>
             </NavLink>
         </div>
         {/* You can include other navigation links/icons here as needed */}

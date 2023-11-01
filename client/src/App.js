@@ -60,7 +60,7 @@ function App() {
     <>
       {currentUser? <Navbar currentUser={currentUser}/>:null}
       <Routes>
-        <Route path="/" element={<Login attempLogin={handleLogin}/>}/>
+        <Route path="/" element={<Login attempLogin={handleLogin} currentUser={currentUser}/>}/>
         <Route path="/signup" element={<Signup attemptSignup={handleSignup} currentUser={currentUser}/>}/>
         <Route path="/profile_page/:userId" element={<ProfilePage currentUser={currentUser}/>}/>
         <Route path="/main_feed" element={<MainFeed currentUser={currentUser}/>}/>

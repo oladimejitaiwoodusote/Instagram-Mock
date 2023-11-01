@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 import {useParams} from 'react-router-dom'
 import PostThumbnail from './PostThumbnail'
 import ProfileHeader from './ProfileHeader'
@@ -10,6 +11,7 @@ function ProfilePage({currentUser}) {
     const [profileUser, setProfileUser] = useState(null)
     const [posts, setPosts] = useState([])
     const [selectedPost, setSelectedPost] = useState(null)
+    const navigate = useNavigate()
 
 
     useEffect(()=>{    
@@ -25,6 +27,7 @@ function ProfilePage({currentUser}) {
         })
          }
         else {
+            navigate("/")
         }
     },[currentUser, userId])
 

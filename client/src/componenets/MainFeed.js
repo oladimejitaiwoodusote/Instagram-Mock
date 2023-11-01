@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Post from './Post'
 import FullPost from './FullPost'
 import './MainFeed.css'
@@ -9,6 +10,7 @@ function MainFeed({currentUser}) {
 
   const [posts, setPosts] = useState([])
   const [selectedPost, setSelectedPost] = useState(null)
+  const navigate = useNavigate()
  
   useEffect(()=>{
       if (currentUser){
@@ -19,6 +21,7 @@ function MainFeed({currentUser}) {
       })
       }
       else {
+        navigate("/")
       }
       },[currentUser])
 
