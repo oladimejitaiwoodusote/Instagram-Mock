@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import './ImageUpload.css'
  
 function ImageUpload() {
   const [image, setImage] = useState(null);
@@ -37,10 +38,10 @@ function ImageUpload() {
     })
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="file" accept="image" onChange={handleImageChange}/>
-      <input type="text" placeholder='Add a caption' value={caption} onChange={handleCaptionChange}/>
-      <button type="submit">Upload</button>
+    <form className="ImageUpload_form" onSubmit={handleSubmit}>
+      <input className="ImageUpload_file" type="file" accept="image" onChange={handleImageChange}/>
+      <input className="ImageUpload_text" type="text" placeholder='Add a caption' value={caption} onChange={handleCaptionChange}/>
+      <button className="ImageUpload_button" type="submit">Upload</button>
     </form>
   )
 }
