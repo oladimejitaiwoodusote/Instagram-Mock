@@ -9,7 +9,6 @@ import MainFeed from './componenets/MainFeed';
 import Navbar from './componenets/Navbar';
 import ImageUpload from './componenets/ImageUpload';
 
-
 function App() {
   const [currentUser, setUser] = useState(null)
   const navigate = useNavigate()

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Post from './Post'
 import FullPost from './FullPost'
 import './MainFeed.css'
+import UserProfilePreview from './UserProfilePreview'
 
 
 
@@ -40,6 +41,7 @@ function MainFeed({currentUser}) {
 
   return (
     <div className='MainFeed_wrapper'>
+      {currentUser? <UserProfilePreview user={currentUser}/>: null}
       {posts_feed}
       {selectedPost? <FullPost post={selectedPost} user={currentUser} onClose={handleCloseModal}/>:null}
     </div>

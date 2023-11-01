@@ -6,6 +6,7 @@ import {CgAddR, CgProfile} from 'react-icons/cg'
 import {MdOutlineExplore} from 'react-icons/md'
 import {BiMessageRoundedDetail} from 'react-icons/bi'
 import {AiOutlineInstagram, AiOutlineSearch, AiOutlineLogout} from 'react-icons/ai'
+import UserProfilePreview from './UserProfilePreview'
 
 
 function Navbar({currentUser, logout}) {

@@ -1,0 +1,22 @@
+.user_preview{
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 0;
+}
+
+.user_preview_info{
+    margin-left: 10px;
+}
+
+.user_username{
+    font-weight: 650;
+    font-size: 15px;
+}
+.user_preview_name_stats{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    font-size: 15px;
+    color: gray;
+}
