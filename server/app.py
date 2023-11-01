@@ -205,6 +205,13 @@ def unfollow(user_id, profile_id):
     db.session.commit()
     return jsonify({'message': "Unfollowed"}), 201
 
+#Get List of Users for search bar
+@app.get('/users')
+def users():
+    users = User.query.all()
+    user_dicts = [user.to_dict() for user in users]
+    return user_dicts, 201
+
 # #Upload Image to Bucket
 @app.post('/image_upload')
 def upload_image():

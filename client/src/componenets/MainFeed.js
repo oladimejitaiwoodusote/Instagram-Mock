@@ -41,7 +41,6 @@ function MainFeed({currentUser}) {
 
   return (
     <div className='MainFeed_wrapper'>
-      {currentUser? <UserProfilePreview user={currentUser}/>: null}
       {posts_feed}
       {selectedPost? <FullPost post={selectedPost} user={currentUser} onClose={handleCloseModal}/>:null}
     </div>

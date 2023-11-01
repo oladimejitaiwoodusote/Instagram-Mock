@@ -1,17 +1,18 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { NavLink } from 'react-router-dom'
 import './Navbar.css'
 import {GoHomeFill} from 'react-icons/go'
 import {CgAddR, CgProfile} from 'react-icons/cg'
 import {MdOutlineExplore} from 'react-icons/md'
-import {BiMessageRoundedDetail} from 'react-icons/bi'
 import {AiOutlineInstagram, AiOutlineSearch, AiOutlineLogout} from 'react-icons/ai'
 import UserProfilePreview from './UserProfilePreview'
 
+function Navbar({currentUser, logout, users}){
+  const [search, setSearch] = useState("")
 
-function Navbar({currentUser, logout}) {
-
-
+  const filteredUsers = users.filter(user => 
+    user.username.toLowerCase().includes(search.toLowerCase())
+    );
 
   return (
     <div className="navbar_wrapper">
@@ -25,7 +26,7 @@ function Navbar({currentUser, logout}) {
         </div>
         <div className='navbar_search'>
             <AiOutlineSearch className="navbar_search-icon"/>
-            <input type="text" placeholder="Search" className="navbar_search-input" />
+            <input type="text" placeholder="Search" className="navbar_search-input" value={search} onChange={e => setSearch(e.target.value)}/>
         </div>
         <div className='navbar_icons'>
             <NavLink className="navbar_link" to="/main_feed" activeClassName="active-link">
@@ -44,7 +45,16 @@ function Navbar({currentUser, logout}) {
                 <AiOutlineLogout onClick={logout}/>
             </div>
         </div>
-        {/* You can include other navigation links/icons here as needed */}
+        {search &&
+          <div className="navbar_search_results">
+             {console.log(search)}
+             {console.log(users)}
+             {filteredUsers.map(user => {
+              return <UserProfilePreview key={user.id} user={user}/>
+             }
+             )}
+          </div>
+        }
       </nav>
     </div>
 

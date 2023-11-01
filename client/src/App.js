@@ -11,6 +11,7 @@ import ImageUpload from './componenets/ImageUpload';
 
 function App() {
   const [currentUser, setUser] = useState(null)
+  const [users, setUsers] = useState([])
   const navigate = useNavigate()
 
   useEffect(()=> {
@@ -21,6 +22,11 @@ function App() {
       .then(data => setUser(data))
       }
     }))
+
+    fetch('/users')
+    .then(response => response.json())
+    .then(data => setUsers(data))
+
   },[])
 
   function handleSignup(userdata){
@@ -74,7 +80,7 @@ function App() {
 
   return (
     <>
-      {currentUser? <Navbar logout={handleLogout} currentUser={currentUser}/>:null}
+      {currentUser? <Navbar logout={handleLogout} currentUser={currentUser} users={users}/>:null}
       <Routes>
         <Route path="/" element={<Login attempLogin={handleLogin} currentUser={currentUser}/>}/>
         <Route path="/signup" element={<Signup attemptSignup={handleSignup} currentUser={currentUser}/>}/>
