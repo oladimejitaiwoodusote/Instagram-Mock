@@ -1,9 +1,11 @@
-import {useState} from 'react'
+import {useState, useRef} from 'react'
 import './ImageUpload.css'
  
 function ImageUpload() {
   const [image, setImage] = useState(null);
   const [caption, setCaption] = useState("")
+
+  const fileInputRef = useRef(null);
 
   function handleImageChange(e) {
     const file = e.target.files[0];
@@ -27,8 +29,15 @@ function ImageUpload() {
     })
     .then(response => response.json())
     .then(data => {
-      if (data.message){
-        console.log('Image uploaded successfully.');
+      if (data.message === 'Image uploaded successfully'){
+        alert('Image uploaded succesfullu');
+        setImage(null)
+        setCaption("")
+
+        if (fileInputRef.current){
+          fileInputRef.current.value = ""
+        }
+
       } else {
         console.error('Error from server:', data.message);
       }
@@ -39,7 +48,7 @@ function ImageUpload() {
   };
   return (
     <form className="ImageUpload_form" onSubmit={handleSubmit}>
-      <input className="ImageUpload_file" type="file" accept="image" onChange={handleImageChange}/>
+      <input ref={fileInputRef} className="ImageUpload_file" type="file" accept="image" onChange={handleImageChange}/>
       <input className="ImageUpload_text" type="text" placeholder='Add a caption' value={caption} onChange={handleCaptionChange}/>
       <button className="ImageUpload_button" type="submit">Upload</button>
     </form>

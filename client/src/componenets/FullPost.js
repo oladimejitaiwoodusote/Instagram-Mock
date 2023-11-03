@@ -85,10 +85,11 @@ function FullPost({post, onClose, user, onPostDeleted}) {
     }
 
     function handleLikeClick(){
+        const method = isLiked ? "DELETE": "POST"
         const endpoint = isLiked ? `/unlike/${post.id}/${user.id}` : `/like/${post.id}/${user.id}`
 
         fetch(endpoint, {
-            method: "POST",
+            method: method,
         })
         .then(response => response.json())
         .then(data => {

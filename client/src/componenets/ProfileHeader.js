@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import './ProfileHeader.css'
 import CustomAvatar from './CustomAvatar'
 
-function ProfileHeader({profileUser, currentUser}) {
+function ProfileHeader({profileUser, currentUser, onClick}) {
 
   const [isFollowing, setIsFollowing] = useState(false)
 
@@ -38,7 +38,7 @@ function ProfileHeader({profileUser, currentUser}) {
             <div className='profile-header_action'>
               <h2 className="profile-header_username">{profileUser.username}</h2>
               {profileUser.id === currentUser.id? 
-              <button className='profile-header-following-button'>Edit Profile</button>
+              <button className='profile-header-following-button' onClick={onClick}>Edit Profile</button>
               : (
                 isFollowing
                 ? <button className="profile-header-following-button" onClick={handleFollowToggle}>Following</button>

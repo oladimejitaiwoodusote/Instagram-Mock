@@ -34,10 +34,11 @@ function Post({post, user, onClick}) {
   },[post.id, user.id]) 
 
   function handleLikeClick(){
+    const method = isLiked ? "DELETE": "POST"
     const endpoint = isLiked ? `/unlike/${post.id}/${user.id}` : `/like/${post.id}/${user.id}`
 
     fetch(endpoint, {
-        method: "POST",
+        method: method,
     })
     .then(response => response.json())
     .then(data => {
@@ -121,7 +122,6 @@ function Post({post, user, onClick}) {
           </div>
       </div>
       <div className ="post_comment_section">
-        {/* {commentSection} */}
         {comments == 0? null: <p onClick={onClick}>View all {comments} comments</p>}
         <form onSubmit={submitHandler}>
           <div className='post_comment_form'>

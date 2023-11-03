@@ -29,7 +29,8 @@ class User(db.Model):
     full_name = db.Column(db.String, nullable=False)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String)
-    avatar = db.Column(db.String)
+    default_avatar_url = "https://storage.googleapis.com/instagram-clone/Empty%20Avatar.jpeg"
+    avatar = db.Column(db.String, default= default_avatar_url)
 
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at = db.Column(db.DateTime, server_default = db.func.now(), onupdate=db.func.now())

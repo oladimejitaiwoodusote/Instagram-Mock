@@ -5,12 +5,14 @@ import PostThumbnail from './PostThumbnail'
 import ProfileHeader from './ProfileHeader'
 import './ProfilePage.css'
 import FullPost from './FullPost'
+import EditProfileForm from './EditProfileForm'
 
 function ProfilePage({currentUser}) {
     const {userId} = useParams()
     const [profileUser, setProfileUser] = useState(null)
     const [posts, setPosts] = useState([])
     const [selectedPost, setSelectedPost] = useState(null)
+    const [showEditForm, setShowEditForm] = useState(null)
     const navigate = useNavigate()
 
 
@@ -56,13 +58,13 @@ function ProfilePage({currentUser}) {
     if (currentUser && profileUser){
         return (
             <div>
-                <ProfileHeader profileUser={profileUser} currentUser={currentUser}/>
+                <ProfileHeader profileUser={profileUser} currentUser={currentUser} onClick={()=> setShowEditForm(true)}/>
                 <hr className='ProfilePage_divider'/>
                 <div className="ProfilePage-posts_grid">
                     {profile_posts_thumbnails}
                 </div>
                 {selectedPost? <FullPost onPostDeleted={handlePostDeleted} user={currentUser} post={selectedPost} onClose={handleCloseModal}/>:null}
-
+                {showEditForm? <EditProfileForm currentUser={currentUser}/> : null}
             </div>
         )
     }

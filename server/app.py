@@ -30,18 +30,18 @@ def check_session():
     user_id = session.get('user_id')
     current_user = User.query.get(user_id)
     if current_user:
-        return current_user.to_dict(), 200
+        return jsonify(current_user.to_dict()), 200
     else:
-        return {"message": "Not logged in"}, 401
+        return jsonify({"message": "Not logged in"}), 401
 
 #Get user profile
 @app.get('/user_profile/<int:id>')
 def get_user(id):
     user = User.query.get(id)
     if user:
-        return user.to_dict(), 200
+        return jsonify(user.to_dict()), 200
     else:
-        return {"message": "User not found"}, 401
+        return jsonify({"message": "User not found"}), 401
 
 #Create account
 @app.post('/signup')
@@ -52,7 +52,7 @@ def signup():
     db.session.add(new_user)
     db.session.commit()
     session['user_id'] = new_user.id
-    return new_user.to_dict(), 201
+    return jsonify(new_user.to_dict()), 201
 
 #Login
 @app.post('/login')
@@ -61,9 +61,9 @@ def login():
     current_user = User.query.where(User.username == json['username']).first()
     if (current_user and bcrypt.check_password_hash(current_user.password, json['password'])):
         session['user_id'] = current_user.id
-        return current_user.to_dict(), 201
+        return jsonify(current_user.to_dict()), 201
     else:
-        return {"message": "Invalid username or password"}, 401
+        return jsonify({"message": "Invalid username or password"}), 401
 
 #Logout
 @app.delete('/logout')
@@ -77,7 +77,7 @@ def get_posts(id):
     #users_posts = Post.query.where(Post.user_id == id).all()
     users_posts = Post.query.filter_by(user_id = id).order_by(Post.created_at.desc()).all()
     post_dicts = [post.to_dict() for post in users_posts]
-    return post_dicts, 201
+    return jsonify(post_dicts), 201
 
 #Get Users Main Feed (Post of Users followed)
 @app.get('/users_followee_posts/<int:id>')
@@ -125,23 +125,23 @@ def get_discover_posts(id):
 def get_comments(id):
     comments = Comment.query.where(Comment.post_id == id)
     comment_dicts = [comment.to_dict() for comment in comments]
-    return comment_dicts, 200
+    return jsonify(comment_dicts), 200
 
 #Get Posts likes
 @app.get('/likes/<int:id>')
 def get_likes(id):
     likes = Like.query.where(Like.post_id == id)
     like_dicts = [like.to_dict() for like in likes]
-    return like_dicts, 200
+    return jsonify(like_dicts), 200
 
 #Get like status of Post for current user
 @app.get('/like_status/<int:post_id>/<int:user_id>')
 def get_like_status(post_id, user_id):
     like = Like.query.filter(Like.user_id == user_id, Like.post_id==post_id ).first() 
     if like:
-        return {"message": True}
+        return jsonify({"message": True}), 200
     else:
-        return {"message": False}
+        return jsonify({"message": False}), 404
 
 #Like Post
 @app.post('/like/<int:post_id>/<int:user_id>')
@@ -151,19 +151,23 @@ def like_post(post_id, user_id):
         new_like = Like(user_id = user_id, post_id = post_id)
         db.session.add(new_like)
         db.session.commit()
+        likes_count = Like.query.filter(Like.post_id == post_id).count()
+        return jsonify({"isLiked":True, "likesCount": likes_count}), 200
+    else:
+        return jsonify({"error":"Like already there"}), 404
 
-    likes_count = Like.query.filter(Like.post_id == post_id).count()
-    return {"isLiked":True, "likesCount": likes_count}
 
 #Unlike Post
-@app.post('/unlike/<int:post_id>/<int:user_id>')
+@app.delete('/unlike/<int:post_id>/<int:user_id>')
 def unlike_post(post_id, user_id):
     like = Like.query.filter(Like.user_id == user_id, Like.post_id==post_id).first()
     if like:
         db.session.delete(like)
         db.session.commit()
-    likes_count = Like.query.filter(Like.post_id == post_id).count()
-    return {"isLiked": False, "likesCount": likes_count}
+        likes_count = Like.query.filter(Like.post_id == post_id).count()
+        return jsonify({"isLiked": False, "likesCount": likes_count}), 200
+    else:
+        return jsonify({"error": "Like not found"}), 404
 
 #Add New Comment
 @app.post('/comment')
@@ -179,11 +183,11 @@ def post_comment():
 def delete_post(post_id):
     post = Post.query.get(post_id)
     if not post:
-        return {"message": "Post not found"}, 404
+        return jsonify({"message": "Post not found"}), 404
 
     db.session.delete(post)
     db.session.commit()
-    return {"message": "Post deleted succssfully"}, 200
+    return jsonify({"message": "Post deleted succssfully"}), 200
 
 #Edit Post - caption
 @app.patch('/edit_post/<int:id>')
@@ -235,9 +239,9 @@ def unfollow(user_id, profile_id):
 def users():
     users = User.query.all()
     user_dicts = [user.to_dict() for user in users]
-    return user_dicts, 201
+    return jsonify(user_dicts), 201
 
-# #Upload Image to Bucket
+#Upload Image to Bucket
 @app.post('/image_upload')
 def upload_image():
     #Upload image to storage bucket
@@ -258,7 +262,7 @@ def upload_image():
         db.session.add(new_post)
         db.session.commit()
 
-        return jsonify({'message': 'Image uploaded succesfully'}), 201
+        return jsonify({'message': 'Image uploaded successfully'}), 201
 
     return jsonify({'message': 'No image uploaded'}), 401
 
