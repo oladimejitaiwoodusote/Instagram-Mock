@@ -64,7 +64,7 @@ function ProfilePage({currentUser}) {
                     {profile_posts_thumbnails}
                 </div>
                 {selectedPost? <FullPost onPostDeleted={handlePostDeleted} user={currentUser} post={selectedPost} onClose={handleCloseModal}/>:null}
-                {showEditForm? <EditProfileForm currentUser={currentUser}/> : null}
+                {showEditForm? <EditProfileForm currentUser={currentUser} onClose={() => setShowEditForm(false)}/> : null}
             </div>
         )
     }

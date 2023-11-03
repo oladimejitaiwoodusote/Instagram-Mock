@@ -266,6 +266,43 @@ def upload_image():
 
     return jsonify({'message': 'No image uploaded'}), 401
 
+#Edit User Profile
+@app.patch('/edit_profile/<int:id>')
+def update_profile(id):
+    #Get user first
+    user = User.query.get(id)
+    #Check if password works
+    if (bcrypt.check_password_hash(user.password, request.form.get('currentPassword'))):
+        #Update avatar
+        new_avatar = request.files['avatar'] 
+        if new_avatar:
+            new_avatar_blob = bucket.blob(new_avatar.filename)
+            new_avatar_blob.upload_from_file(new_avatar)
+            avatar_url = new_avatar_blob.public_url
+            user.avatar = avatar_url
+
+        new_username = request.form.get('username')
+        if new_username:
+            user.username = new_username
+
+        new_full_name = request.form.get('fullName')
+        if new_full_name:
+            user.full_name = new_full_name
+
+        new_email = request.form.get('email')
+        if new_email:
+            user.email = new_email
+
+        new_password = request.form.get('password')
+        if new_password:
+            user.password = new_password        
+
+        db.session.commit()
+        return jsonify({"message": "Profile updated successfully"}), 200
+
+    else:
+        return jsonify({'message': 'Password not correct'}), 400
+
 
 
 if __name__ == "__main__":

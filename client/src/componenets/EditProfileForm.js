@@ -2,9 +2,9 @@ import React, {useState, useRef} from 'react'
 import './EditProfileForm.css'
 
 function EditProfileForm({currentUser, onClose}) {
-    const [username, setUsername] = useState(currentUser.username)
-    const [fullName, setFullName] = useState(currentUser.full_name)
-    const [email, setEmail] = useState(currentUser.email);
+    const [username, setUsername] = useState("")
+    const [fullName, setFullName] = useState("")
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [avatar, setAvatar] = useState(null);
     const [currentPassword, setCurrentPassword] = useState("");
@@ -45,7 +45,7 @@ function EditProfileForm({currentUser, onClose}) {
             }
 
             else{
-                alert(data.essage);
+                alert(data.message);
             }
 
         })
@@ -55,8 +55,8 @@ function EditProfileForm({currentUser, onClose}) {
     }
 
   return (
-    <div className='EditProfileForm_overlay'>
-        <div className='EditProfileForm_container'>
+    <div className='EditProfileForm_overlay'onClick={onClose}>
+        <div className='EditProfileForm_container' onClick={(e)=> e.stopPropagation()}>
             <form className='EditProfileForm_form' onSubmit={handleSubmit}>
                 <input ref={avatarInputRef} className="EditProfileForm_file" type="file" accept="image" onChange={handleAvatarChange}/>
                 <input className="EditProfileForm_text" type="text" placeholder='Username' value={username} onChange={e=> setUsername(e.target.value)}/>
@@ -66,6 +66,7 @@ function EditProfileForm({currentUser, onClose}) {
                 <input className="EditProfileForm_text" type="text" placeholder="Current Password" value={currentPassword} onChange={e=> setCurrentPassword(e.target.value)}/>
                 <button className="EditProfileForm_button" type="submit">Update</button>
             </form>
+            <button className="EditProfileForm_close_button" onClick={onClose}>Close</button>
         </div>
     </div>
   )
