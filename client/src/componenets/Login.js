@@ -37,7 +37,7 @@ function Login({attempLogin, currentUser}) {
             <h1 className='login-logo'>Instagram</h1>
             <form className='login-form' onSubmit={submitHandler}>
                 <input className='login-input-field' name='username' placeholder='Username' onChange={changeHandler} value={formData.username}/>
-                <input className='login-input-field' name='password' placeholder='Password' onChange={changeHandler} value={formData.password}/>
+                <input className='login-input-field' type="password" name='password' placeholder='Password' onChange={changeHandler} value={formData.password}/>
                 <input className='login-submit-button' type='submit' value='Log in'/>
             </form>
         </div>

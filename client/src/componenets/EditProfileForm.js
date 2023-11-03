@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react'
 import './EditProfileForm.css'
 
-function EditProfileForm({currentUser, onClose}) {
+function EditProfileForm({currentUser, onClose, fetchUserProfile}) {
     const [username, setUsername] = useState("")
     const [fullName, setFullName] = useState("")
     const [email, setEmail] = useState("");
@@ -38,6 +38,7 @@ function EditProfileForm({currentUser, onClose}) {
                 if (avatarInputRef.current){
                     avatarInputRef.current.value = "";
                 }
+                fetchUserProfile()
                 onClose()
             } 
             else if(data.message === 'Incorrect current password'){
@@ -62,8 +63,8 @@ function EditProfileForm({currentUser, onClose}) {
                 <input className="EditProfileForm_text" type="text" placeholder='Username' value={username} onChange={e=> setUsername(e.target.value)}/>
                 <input className="EditProfileForm_text" type="text" placeholder='Full Name' value={fullName} onChange={e=> setFullName(e.target.value)}/>
                 <input className="EditProfileForm_text" type="text" placeholder="Email" value={email} onChange={e=> setEmail(e.target.value)}/>
-                <input className="EditProfileForm_text" type="text" placeholder="Password" value={password} onChange={e=> setPassword(e.target.value)}/>
-                <input className="EditProfileForm_text" type="text" placeholder="Current Password" value={currentPassword} onChange={e=> setCurrentPassword(e.target.value)}/>
+                <input className="EditProfileForm_text" type="password" placeholder="Password" value={password} onChange={e=> setPassword(e.target.value)}/>
+                <input className="EditProfileForm_text" type="password" placeholder="Current Password" value={currentPassword} onChange={e=> setCurrentPassword(e.target.value)}/>
                 <button className="EditProfileForm_button" type="submit">Update</button>
             </form>
             <button className="EditProfileForm_close_button" onClick={onClose}>Close</button>

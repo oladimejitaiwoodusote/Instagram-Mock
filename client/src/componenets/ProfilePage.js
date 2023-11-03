@@ -16,12 +16,15 @@ function ProfilePage({currentUser}) {
     const navigate = useNavigate()
 
 
-    useEffect(()=>{    
+    function fetchUserProfile(){
         fetch(`/user_profile/${userId}`)
             .then(response => response.json())
             .then(data => setProfileUser(data))
-        if (currentUser){
-        
+    }
+    
+    useEffect(()=>{    
+        fetchUserProfile()
+        if (currentUser){       
         fetch(`/users_posts/${userId}`)
         .then(response => response.json())
         .then(data => {
@@ -29,7 +32,7 @@ function ProfilePage({currentUser}) {
         })
          }
         else {
-            navigate("/")
+            console.log("Loading")
         }
     },[currentUser, userId])
 
@@ -64,7 +67,7 @@ function ProfilePage({currentUser}) {
                     {profile_posts_thumbnails}
                 </div>
                 {selectedPost? <FullPost onPostDeleted={handlePostDeleted} user={currentUser} post={selectedPost} onClose={handleCloseModal}/>:null}
-                {showEditForm? <EditProfileForm currentUser={currentUser} onClose={() => setShowEditForm(false)}/> : null}
+                {showEditForm? <EditProfileForm fetchUserProfile={fetchUserProfile} currentUser={currentUser} onClose={() => setShowEditForm(false)}/> : null}
             </div>
         )
     }

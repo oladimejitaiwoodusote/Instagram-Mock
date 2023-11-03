@@ -42,7 +42,7 @@ function Signup({attemptSignup, currentUser}) {
                 <input className='signup-input-field' name="email" placeholder="Email" onChange={changeHandler} value={formData.email}/>
                 <input className='signup-input-field' name="full_name" placeholder="Full Name" onChange={changeHandler} value={formData.full_name}/>
                 <input className='signup-input-field' name="username" placeholder="Username" onChange={changeHandler} value={formData.username}/>
-                <input className='signup-input-field' name="password" placeholder="Password" onChange={changeHandler} value={formData.password}/>
+                <input className='signup-input-field' type="password" name="password" placeholder="Password" onChange={changeHandler} value={formData.password}/>
                 <input className='signup-submit-button'type="submit" value='Sign up'/>
             </form>
         </div>  

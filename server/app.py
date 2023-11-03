@@ -274,7 +274,7 @@ def update_profile(id):
     #Check if password works
     if (bcrypt.check_password_hash(user.password, request.form.get('currentPassword'))):
         #Update avatar
-        new_avatar = request.files['avatar'] 
+        new_avatar = request.files.get('avatar')
         if new_avatar:
             new_avatar_blob = bucket.blob(new_avatar.filename)
             new_avatar_blob.upload_from_file(new_avatar)
