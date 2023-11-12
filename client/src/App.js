@@ -15,19 +15,49 @@ function App() {
   const [users, setUsers] = useState([])
   const navigate = useNavigate()
 
-  useEffect(()=> {
+  // useEffect(()=> {
+  //   fetch('/check_session')
+  //   .then((response => {
+  //     if(response.ok){
+  //       response.json()
+  //     .then(data => setUser(data))
+  //     }
+  //   }))
+
+  //   fetch('/users')
+  //   .then(response => response.json())
+  //   .then(data => setUsers(data))
+
+  // },[])
+
+  useEffect(() => {
     fetch('/check_session')
-    .then((response => {
+    .then(response => {
       if(response.ok){
-        response.json()
-      .then(data => setUser(data))
+        return response.json()
       }
-    }))
+      else {
+        throw new Error('Session check failed')
+      }
+    })
+    .then(data => setUser(data))
+    .catch(error => {
+      console.error("Error checking session:", error);
+    });
 
     fetch('/users')
-    .then(response => response.json())
+    .then(response => {
+      if(response.ok) {
+        return response.json()
+      }
+      else {
+        throw new Error('Failed to fetch users')
+      }
+    })
     .then(data => setUsers(data))
-
+    .catch(error => {
+      console.error("Error fetching users:", error)
+    })
   },[])
 
   function handleSignup(userdata){
