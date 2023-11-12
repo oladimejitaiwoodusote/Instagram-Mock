@@ -43,19 +43,19 @@ function Navbar({currentUser, logout, users}){
             <input type="text" placeholder="Search" className="navbar_search-input" value={search} onChange={e => setSearch(e.target.value)}/>
         </div>
         <div className='navbar_icons'>
-            <NavLink className="navbar_link" to="/main_feed">
+            <NavLink className="navbar_link" to="/main_feed" aria-label='Home'>
                 <GoHomeFill className='navbar_icon'/>
             </NavLink>
-            <NavLink className="navbar_link" to="/image_upload">
+            <NavLink className="navbar_link" to="/image_upload" aria-label="Add Post">
                 <CgAddR/>
             </NavLink>
-            <NavLink className="navbar_link" to={`/profile_page/${currentUser.id}`}>
+            <NavLink className="navbar_link" to={`/profile_page/${currentUser.id}`} aria-label="Profile">
                 <CgProfile/>
             </NavLink>
-            <NavLink className="navbar_link" to="/discover_page">
+            <NavLink className="navbar_link" to="/discover_page" aria-label="Explore">
                 <MdOutlineExplore/>
             </NavLink>
-            <div className="navbar_link">
+            <div className="navbar_link" aria-label='Logout'>
                 <AiOutlineLogout onClick={logout}/>
             </div>
         </div>
