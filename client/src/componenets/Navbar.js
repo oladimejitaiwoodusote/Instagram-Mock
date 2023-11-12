@@ -22,7 +22,6 @@ function Navbar({currentUser, logout, users}){
     <div className="navbar_wrapper">
       <nav className="navbar">
         <div className="navbar_logo-wrapper">
-          {/* Replace with your actual logo */}
           <NavLink to="/main_feed" style={{textDecoration:'none', color: 'inherit'}}>
               <span className="navbar_instagram-logo">Instagram-Clone</span>
               <AiOutlineInstagram/>
@@ -33,26 +32,24 @@ function Navbar({currentUser, logout, users}){
             <input type="text" placeholder="Search" className="navbar_search-input" value={search} onChange={e => setSearch(e.target.value)}/>
         </div>
         <div className='navbar_icons'>
-            <NavLink className="navbar_link" to="/main_feed" activeClassName="active-link">
+            <NavLink className="navbar_link" to="/main_feed">
                 <GoHomeFill className='navbar_icon'/>
             </NavLink>
-            <NavLink className="navbar_link" to="/image_upload" activeClassName="active-link">
+            <NavLink className="navbar_link" to="/image_upload">
                 <CgAddR/>
             </NavLink>
-            <NavLink className="navbar_link" to={`/profile_page/${currentUser.id}`} activeClassName="active-link">
+            <NavLink className="navbar_link" to={`/profile_page/${currentUser.id}`}>
                 <CgProfile/>
             </NavLink>
-            <NavLink className="navbar_link" to="/discover_page" activeClassName="active-link">
+            <NavLink className="navbar_link" to="/discover_page">
                 <MdOutlineExplore/>
             </NavLink>
-            <div className="navbar_link" activeClassName="active-link">
+            <div className="navbar_link">
                 <AiOutlineLogout onClick={logout}/>
             </div>
         </div>
         {search &&
           <div className="navbar_search_results">
-             {console.log(search)}
-             {console.log(users)}
              {filteredUsers.map(user => {
               return <UserProfilePreview key={user.id} user={user} resetSearch={resetSearch}/>
              }
