@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { NavLink } from 'react-router-dom'
 import './Navbar.css'
 import {GoHomeFill} from 'react-icons/go'
@@ -9,9 +9,20 @@ import UserProfilePreview from './UserProfilePreview'
 
 function Navbar({currentUser, logout, users}){
   const [search, setSearch] = useState("")
+  const [debouncedSearch, setDebouncedSearch] = useState(search)
+
+  useEffect(() => {
+    const handler = setTimeout(()=> {
+      setDebouncedSearch(search)
+    }, 300);
+
+    return ()=> {
+      clearTimeout(handler)
+    }
+  }, [search])
 
   const filteredUsers = users.filter(user => 
-    user.username.toLowerCase().includes(search.toLowerCase())
+    user.username.toLowerCase().includes(debouncedSearch.toLowerCase())
     );
 
   function resetSearch(){
