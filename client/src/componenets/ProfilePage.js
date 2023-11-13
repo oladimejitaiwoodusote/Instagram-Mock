@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
 import {useParams} from 'react-router-dom'
 import PostThumbnail from './PostThumbnail'
 import ProfileHeader from './ProfileHeader'
@@ -13,13 +12,15 @@ function ProfilePage({currentUser}) {
     const [posts, setPosts] = useState([])
     const [selectedPost, setSelectedPost] = useState(null)
     const [showEditForm, setShowEditForm] = useState(null)
-    const navigate = useNavigate()
 
 
     function fetchUserProfile(){
         fetch(`/user_profile/${userId}`)
             .then(response => response.json())
             .then(data => setProfileUser(data))
+            .catch(error => {
+                console.error("Error fetching user profile:", error);
+            });
     }
     
     useEffect(()=>{    
@@ -29,6 +30,9 @@ function ProfilePage({currentUser}) {
         .then(response => response.json())
         .then(data => {
             setPosts(data)
+        })
+        .catch(error => {
+            console.log("Error fetching users posts:", error)
         })
          }
         else {
@@ -57,14 +61,18 @@ function ProfilePage({currentUser}) {
         setPosts(updatedPosts);
     }
 
-
     if (currentUser && profileUser){
         return (
             <div>
                 <ProfileHeader profileUser={profileUser} currentUser={currentUser} onClick={()=> setShowEditForm(true)}/>
                 <hr className='ProfilePage_divider'/>
-                <div className="ProfilePage-posts_grid">
-                    {profile_posts_thumbnails}
+                <div className={posts.length > 0 ? "ProfilePage-posts_grid": "ProfilePage-no-posts"}>
+                    {/* {profile_posts_thumbnails} */}
+                    {posts.length > 0 ? (
+                        profile_posts_thumbnails
+                    ): (
+                        <p>No posts to display</p>
+                    )}
                 </div>
                 {selectedPost? <FullPost onPostDeleted={handlePostDeleted} user={currentUser} post={selectedPost} onClose={handleCloseModal}/>:null}
                 {showEditForm? <EditProfileForm fetchUserProfile={fetchUserProfile} currentUser={currentUser} onClose={() => setShowEditForm(false)}/> : null}
@@ -73,7 +81,11 @@ function ProfilePage({currentUser}) {
     }
 
     else {
-        return ("LOADING...")
+        return (
+            <div className='ProfilePage_loader-container'>
+                <div className='ProfilePage_loader'></div>
+            </div>
+        )
     }
 }
 
