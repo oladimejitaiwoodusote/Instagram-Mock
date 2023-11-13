@@ -22,6 +22,7 @@ function App() {
         return response.json()
       }
       else {
+        navigate("/")
         throw new Error('Session check failed')
       }
     })
@@ -43,7 +44,7 @@ function App() {
     .catch(error => {
       console.error("Error fetching users:", error)
     })
-  },[])
+  },[navigate])
 
   function handleSignup(userdata){
     fetch('/signup',{

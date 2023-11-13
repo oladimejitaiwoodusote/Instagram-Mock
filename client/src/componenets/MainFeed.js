@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Post from './Post'
 import FullPost from './FullPost'
 import './MainFeed.css'
@@ -10,7 +9,7 @@ function MainFeed({currentUser}) {
 
   const [posts, setPosts] = useState([])
   const [selectedPost, setSelectedPost] = useState(null)
-  const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(true)
  
   useEffect(()=>{
       if (currentUser){
@@ -19,16 +18,18 @@ function MainFeed({currentUser}) {
       .then(data => {
           setPosts(data)
       })
-      }
-      else {
-        navigate("/")
+      .catch(error => {
+        console.error("Error fetching main feed posts:", error)
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
       }
       },[currentUser])
 
 
   function handlePostClick(post){
     setSelectedPost(post)
-    console.log(post)
   }
 
   function handleCloseModal(){
@@ -40,8 +41,20 @@ function MainFeed({currentUser}) {
 
   return (
     <div className='MainFeed_wrapper'>
-      {posts_feed}
-      {selectedPost? <FullPost post={selectedPost} user={currentUser} onClose={handleCloseModal}/>:null}
+      {isLoading ? (
+        <div className='MainFeed_loader-container'>
+            <div className='MainFeed_loader'></div>
+        </div>
+      ) : (
+        <>
+          {posts.length > 0 ? (
+            posts_feed
+          ) : (
+            <p>No posts to display</p>
+          )}
+          {selectedPost? <FullPost post={selectedPost} user={currentUser} onClose={handleCloseModal}/>:null}
+        </>
+      )}
     </div>
   )
 }

@@ -13,16 +13,6 @@ function ProfilePage({currentUser}) {
     const [selectedPost, setSelectedPost] = useState(null)
     const [showEditForm, setShowEditForm] = useState(null)
 
-
-    // function fetchUserProfile(){
-    //     fetch(`/user_profile/${userId}`)
-    //         .then(response => response.json())
-    //         .then(data => setProfileUser(data))
-    //         .catch(error => {
-    //             console.error("Error fetching user profile:", error);
-    //         });
-    // }
-
     const fetchUserProfile = useCallback(() => {
         fetch(`/user_profile/${userId}`)
             .then(response => response.json())
