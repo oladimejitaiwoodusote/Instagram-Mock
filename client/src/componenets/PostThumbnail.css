@@ -1,7 +1,12 @@
 .PostThumbnail {
     position: relative;
-    padding-bottom: 100%; /* This makes the div maintain a 1:1 aspect ratio */
-    overflow: hidden; /* Ensures no parts of the image spill out of the container */
+    padding-bottom: 100%; 
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.PostThumbnail:hover {
+    transform: scale(1.05);
 }
 
 .PostThumbnail-Image{
