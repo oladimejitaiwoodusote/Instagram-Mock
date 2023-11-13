@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import {useParams} from 'react-router-dom'
 import PostThumbnail from './PostThumbnail'
 import ProfileHeader from './ProfileHeader'
@@ -14,14 +14,23 @@ function ProfilePage({currentUser}) {
     const [showEditForm, setShowEditForm] = useState(null)
 
 
-    function fetchUserProfile(){
+    // function fetchUserProfile(){
+    //     fetch(`/user_profile/${userId}`)
+    //         .then(response => response.json())
+    //         .then(data => setProfileUser(data))
+    //         .catch(error => {
+    //             console.error("Error fetching user profile:", error);
+    //         });
+    // }
+
+    const fetchUserProfile = useCallback(() => {
         fetch(`/user_profile/${userId}`)
             .then(response => response.json())
             .then(data => setProfileUser(data))
             .catch(error => {
                 console.error("Error fetching user profile:", error);
-            });
-    }
+            })
+    },[userId])
     
     useEffect(()=>{    
         fetchUserProfile()
@@ -38,7 +47,7 @@ function ProfilePage({currentUser}) {
         else {
             console.log("Loading")
         }
-    },[currentUser, userId])
+    },[currentUser, userId, fetchUserProfile])
 
     useEffect(()=> {
         setSelectedPost(null)

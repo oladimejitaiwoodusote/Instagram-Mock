@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import Post from './Post'
 import FullPost from './FullPost'
 import './MainFeed.css'
-import UserProfilePreview from './UserProfilePreview'
 
 
 
