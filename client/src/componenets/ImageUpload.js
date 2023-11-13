@@ -30,7 +30,7 @@ function ImageUpload() {
     .then(response => response.json())
     .then(data => {
       if (data.message === 'Image uploaded successfully'){
-        alert('Image uploaded succesfullu');
+        alert('Image uploaded succesfully');
         setImage(null)
         setCaption("")
 
