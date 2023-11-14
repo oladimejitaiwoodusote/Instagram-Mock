@@ -22,8 +22,6 @@ function FullPost({post, onClose, user, onPostDeleted}) {
         fetch(`/comments/${post.id}`)
         .then(response => response.json())
         .then(data => setComments(data))
-        console.log(post.user_id)
-        console.log(user.id)
     },[post.id])
 
 
@@ -147,8 +145,8 @@ function FullPost({post, onClose, user, onPostDeleted}) {
     }
 
   return (
-    <div className='FullPost'>
-        <div className='FullPost_content'>
+    <div className='FullPost' onClick={onClose}>
+        <div className='FullPost_content' onClick={(e)=> e.stopPropagation()}>
             <img src={post.image} alt="Post content" className="FullPost_image"/>
             <div className="FullPost_details">
                 <div className="FullPost_header">
