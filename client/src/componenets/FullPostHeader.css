@@ -1,0 +1,68 @@
+.FullPost_header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: #333;
+    padding-left: 10px;
+}
+
+.FullPost_header p {
+    color: #333;
+    font-weight: bold;
+}
+
+.FullPost_user_info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+}
+
+.FullPost_user_info p {
+    margin: 0;
+}
+
+.FullPost_options {
+    position: relative;
+}
+
+.FullPost_options_button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+}
+
+.FullPost_options_menu {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 2;
+}
+
+.FullPost_options_menu button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transform: background-color 0.3s ease;
+}
+
+.FullPost_edit_button, .FullPost_delete_button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    opacity: 0.7;
+}
