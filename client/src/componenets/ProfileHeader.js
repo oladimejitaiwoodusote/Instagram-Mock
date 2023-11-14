@@ -10,7 +10,10 @@ function ProfileHeader({profileUser, currentUser, onClick}) {
     fetch(`/is_following/${currentUser.id}/${profileUser.id}`)
     .then(response => response.json())
     .then(data => setIsFollowing(data.message))
-  },[])
+    .catch(error => {
+      console.error("Error checking follow status:", error)
+    })
+  },[currentUser.id, profileUser.id])
 
   function handleFollowToggle(){
     const method = isFollowing? 'DELETE': 'POST'
