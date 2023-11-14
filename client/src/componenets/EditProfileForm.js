@@ -19,6 +19,12 @@ function EditProfileForm({currentUser, onClose, fetchUserProfile}) {
     function handleSubmit(e){
         e.preventDefault()
 
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if(email && !emailPattern.test(email)){
+            alert("Please enter a valid email address.");
+            return;
+        }
+
         const formData = new FormData();
         formData.append('username', username)
         formData.append('fullName', fullName)

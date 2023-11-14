@@ -13,15 +13,17 @@ function ProfilePage({currentUser}) {
     const [selectedPost, setSelectedPost] = useState(null)
     const [showEditForm, setShowEditForm] = useState(null)
 
+    
     const fetchUserProfile = useCallback(() => {
         fetch(`/user_profile/${userId}`)
-            .then(response => response.json())
-            .then(data => setProfileUser(data))
+        .then(response => response.json())
+        .then(data => {
+            setProfileUser(data)})
             .catch(error => {
                 console.error("Error fetching user profile:", error);
             })
-    },[userId])
-    
+        },[userId])
+        
     useEffect(()=>{    
         fetchUserProfile()
         if (currentUser){       
@@ -60,10 +62,15 @@ function ProfilePage({currentUser}) {
         setPosts(updatedPosts);
     }
 
+    function openEditProfileForm(){
+        setShowEditForm(true);
+        fetchUserProfile();
+    }
+
     if (currentUser && profileUser){
         return (
             <div>
-                <ProfileHeader profileUser={profileUser} currentUser={currentUser} onClick={()=> setShowEditForm(true)}/>
+                <ProfileHeader profileUser={profileUser} currentUser={currentUser} onClick={openEditProfileForm}/>
                 <hr className='ProfilePage_divider'/>
                 <div className={posts.length > 0 ? "ProfilePage-posts_grid": "ProfilePage-no-posts"}>
                     {/* {profile_posts_thumbnails} */}
@@ -74,7 +81,7 @@ function ProfilePage({currentUser}) {
                     )}
                 </div>
                 {selectedPost? <FullPost onPostDeleted={handlePostDeleted} user={currentUser} post={selectedPost} onClose={handleCloseModal}/>:null}
-                {showEditForm? <EditProfileForm fetchUserProfile={fetchUserProfile} currentUser={currentUser} onClose={() => setShowEditForm(false)}/> : null}
+                {showEditForm && (<EditProfileForm isOpen={showEditForm} fetchUserProfile={fetchUserProfile} currentUser={currentUser} onClose={() => setShowEditForm(false)}/>)}
             </div>
         )
     }
