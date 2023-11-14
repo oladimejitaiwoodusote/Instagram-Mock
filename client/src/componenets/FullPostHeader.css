@@ -1,4 +1,4 @@
-.FullPost_header {
+.FullPostHeader {
     display: flex;
     justify-content: space-between; 
     align-items: center;
@@ -8,34 +8,34 @@
     padding-left: 10px;
 }
 
-.FullPost_header p {
+.FullPostHeader p {
     color: #333;
     font-weight: bold;
 }
 
-.FullPost_user_info {
+.FullPostHeader_user_info {
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: 15px;
 }
 
-.FullPost_user_info p {
+.FullPostHeader_user_info p {
     margin: 0;
 }
 
-.FullPost_options {
+.FullPostHeader_options {
     position: relative;
 }
 
-.FullPost_options_button {
+.FullPostHeader_options_button {
     background: none;
     border: none;
     cursor: pointer;
     font-size: 1.5em;
 }
 
-.FullPost_options_menu {
+.FullPostHeader_options_menu {
     position: absolute;
     right: 0;
     top: 30px;
@@ -45,7 +45,7 @@
     z-index: 2;
 }
 
-.FullPost_options_menu button {
+.FullPostHeader_options_menu button {
     display: block;
     width: 100%;
     padding: 10px;
