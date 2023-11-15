@@ -69,7 +69,7 @@ function Post({post, user, onClick}) {
   }
 
   function changeHandler(e){
-    if (e.key == 'Enter' && !e.shiftKey){
+    if (e.key === 'Enter' && !e.shiftKey){
       e.preventDefault()
       if (newComment.trim() !== ""){
         submitHandler(e)
@@ -103,7 +103,7 @@ function Post({post, user, onClick}) {
             <h4>{post.username}</h4>
         </Link>
       </div>
-      <img className='post_image' src={post.image}/>
+      <img className='post_image' src={post.image} alt={post.caption}/>
       <div className="post_engagement">
           <div className="post_engagement_icons">
               <button className='post_icon_button' onClick={handleLikeClick}>
@@ -122,7 +122,7 @@ function Post({post, user, onClick}) {
           </div>
       </div>
       <div className ="post_comment_section">
-        {comments == 0? null: <p onClick={onClick}>View all {comments} comments</p>}
+        {comments === 0? null: <p onClick={onClick}>View all {comments} comments</p>}
         <form onSubmit={submitHandler}>
           <div className='post_comment_form'>
             <textarea className="post_comment_input" 
