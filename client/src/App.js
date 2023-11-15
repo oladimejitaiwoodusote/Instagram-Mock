@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Login from './componenets/Login';
 import './App.css';
 import {Routes, Route} from 'react-router-dom'
@@ -14,6 +14,7 @@ function App() {
   const [currentUser, setUser] = useState(null)
   const [users, setUsers] = useState([])
   const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     fetch('/check_session')
@@ -22,13 +23,15 @@ function App() {
         return response.json()
       }
       else {
-        navigate("/")
         throw new Error('Session check failed')
       }
     })
     .then(data => setUser(data))
     .catch(error => {
       console.error("Error checking session:", error);
+      if (location.pathname !== '/signup'){
+        navigate('/')
+      }
     });
 
     fetch('/users')
@@ -44,7 +47,7 @@ function App() {
     .catch(error => {
       console.error("Error fetching users:", error)
     })
-  },[navigate])
+  },[navigate, location.pathname])
 
   function handleSignup(userdata){
     fetch('/signup',{

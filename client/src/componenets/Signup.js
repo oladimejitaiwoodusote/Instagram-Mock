@@ -20,6 +20,12 @@ function Signup({attemptSignup, currentUser}) {
 
     function submitHandler(e){
         e.preventDefault()
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (formData.email && !emailPattern.test(formData.email)){
+            alert("Please enter a valid email address.")
+            return;
+        }
+        
         attemptSignup(formData)
     }
 
