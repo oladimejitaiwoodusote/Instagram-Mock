@@ -1,12 +1,10 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {Link} from 'react-router-dom'
 import FullPostHeader from './FullPostHeader';
+import CommentSection from './CommentSection';
+import EngagementSection from './EngagementSection';
 import './FullPost.css'
 import Avatar from '@mui/material/Avatar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
-import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
-import {FiMessageCircle} from 'react-icons/fi'
 
 function FullPost({post, onClose, user, onPostDeleted}) {
     const [comments, setComments] = useState([])
@@ -37,18 +35,6 @@ function FullPost({post, onClose, user, onPostDeleted}) {
         .then(response => response.json())
         .then(data => setIsLiked(data.message))
     },[post.id, user.id]) 
-
-    const commentSection = comments.map(comment => {
-        return <div className="FullPost_username_caption">
-                    <Avatar src={comment.avatar} alt={comment.user}/>
-                    <div className="FullPost_caption_container">
-                        <Link to={`/profile_page/${comment.user_id}`} style={{textDecoration:'none', color: 'inherit'}}>
-                            <span className='FullPost_username'>{comment.user}</span>
-                        </Link>
-                        <p className='FullPost_caption'>{comment.text}</p>
-                    </div>
-               </div>
-    })
 
     function handleCommentIconClick(){
         commentInputRef.current.focus()
@@ -170,20 +156,10 @@ function FullPost({post, onClose, user, onPostDeleted}) {
                 </div>
                 <div className="FullPost_footer">
                     <div className="FullPost_comments_scrollable">
-                        {commentSection}
+                        <CommentSection comments={comments}/>
                     </div>
                     <hr className="FullPost_separator" />
-                    <div className="FullPost_engagement">
-                        <div className="FullPost_engagement_icons">
-                            <button className="FullPost_icon_button" onClick={handleLikeClick}>
-                                <FontAwesomeIcon icon={isLiked? solidHeart : regularHeart} className={isLiked? 'FullPost_liked':''}/>
-                            </button>
-                            <button className='FullPost_icon_button' onClick={handleCommentIconClick}>
-                                <FiMessageCircle/>
-                            </button>
-                        </div>
-                        <p>{likes} likes</p>
-                    </div>
+                    <EngagementSection isLiked={isLiked} onLikeClick={handleLikeClick} onCommentIconClick={handleCommentIconClick} likes={likes}/>
                 </div>
                 <hr className="FullPost_separator"/>
                 <form onSubmit={submitHandler}>

@@ -1,0 +1,38 @@
+.FullPost_username_caption {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding-left: 10px;
+    padding-bottom: 20px;
+    padding-right: 50x;
+}
+
+.FullPost_caption {
+    flex-grow: 1;
+    font-size: 15px;
+    word-break: break-word; 
+    overflow-wrap: break-word;
+    padding-right: 100px;
+}
+
+.FullPost_username{
+    font-weight: bold;
+    margin-right: 5px; 
+    font-size: 15px;
+}
+
+.FullPost_caption_wrap p:first-child {
+    margin-right: 5px;
+}
+
+.FullPost_caption_container{
+    display: inline-block;
+    margin-left: 3px;
+    margin-right: 30px;
+    
+}
+
+.FullPost_username, .FullPost_caption {
+    display: inline;
+}
+
