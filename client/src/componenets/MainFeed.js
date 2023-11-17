@@ -13,7 +13,7 @@ function MainFeed({currentUser}) {
  
   useEffect(()=>{
       if (currentUser){
-      fetch(`/users_followee_posts/${currentUser.id}`)
+      fetch(`http://localhost:5555/users_followee_posts/${currentUser.id}`)
       .then(response => response.json())
       .then(data => {
           setPosts(data)

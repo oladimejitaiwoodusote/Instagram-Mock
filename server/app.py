@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, make_response, session
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from models import *
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
@@ -9,6 +10,7 @@ from google.cloud import storage
 import random
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False

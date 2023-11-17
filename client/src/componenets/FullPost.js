@@ -18,20 +18,20 @@ function FullPost({post, onClose, user, onPostDeleted}) {
     const commentInputRef = useRef(null)
     
     useEffect(()=> {
-        fetch(`/comments/${post.id}`)
+        fetch(`http://localhost:5555/comments/${post.id}`)
         .then(response => response.json())
         .then(data => setComments(data))
     },[post.id])
 
 
     useEffect(()=> {
-        fetch(`/likes/${post.id}`)
+        fetch(`http://localhost:5555/likes/${post.id}`)
         .then(response => response.json())
         .then(data => setLikes(data.length))
     })
 
     useEffect(()=> {
-        fetch(`/like_status/${post.id}/${user.id}`)
+        fetch(`http://localhost:5555/like_status/${post.id}/${user.id}`)
         .then(response => response.json())
         .then(data => setIsLiked(data.message))
     },[post.id, user.id]) 
@@ -47,7 +47,7 @@ function FullPost({post, onClose, user, onPostDeleted}) {
             "post_id": post.id
         }
 
-        fetch(`/comment`,{
+        fetch(`http://localhost:5555/comment`,{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ function FullPost({post, onClose, user, onPostDeleted}) {
 
     function handleLikeClick(){
         const method = isLiked ? "DELETE": "POST"
-        const endpoint = isLiked ? `/unlike/${post.id}/${user.id}` : `/like/${post.id}/${user.id}`
+        const endpoint = isLiked ? `http://localhost:5555/unlike/${post.id}/${user.id}` : `http://localhost:5555/like/${post.id}/${user.id}`
 
         fetch(endpoint, {
             method: method,
@@ -85,7 +85,7 @@ function FullPost({post, onClose, user, onPostDeleted}) {
 
     function handleEditSubmit(e){
         e.preventDefault()
-        fetch(`/edit_post/${post.id}`,{
+        fetch(`http://localhost:5555/edit_post/${post.id}`,{
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ function FullPost({post, onClose, user, onPostDeleted}) {
         }
     }
     function handleDeleteClick(){
-        fetch(`/delete_post/${post.id}`, {
+        fetch(`http://localhost:5555/delete_post/${post.id}`, {
             method: "DELETE",
         })
         .then(response => {

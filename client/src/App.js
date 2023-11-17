@@ -17,7 +17,9 @@ function App() {
   const location = useLocation()
 
   useEffect(() => {
-    fetch('/check_session')
+    fetch('http://localhost:5555/check_session',{
+      credentials: 'include'
+    })
     .then(response => {
       if(response.ok){
         return response.json()
@@ -34,7 +36,7 @@ function App() {
       }
     });
 
-    fetch('/users')
+    fetch('http://localhost:5555/users')
     .then(response => {
       if(response.ok) {
         return response.json()
@@ -50,26 +52,28 @@ function App() {
   },[navigate, location.pathname])
 
   function handleSignup(userdata){
-    fetch('/signup',{
+    fetch('http://localhost:5555/signup',{
       method : "POST",
       headers: {
         'Content-Type': 'application/json',
         'Accepts': 'application/json'
       },
-      body: JSON.stringify(userdata) 
+      body: JSON.stringify(userdata),
+      credentials: 'include'
     })
     .then(response => response.json())
     .then(data => setUser(data))
   }
   
   function handleLogin(userdata){
-    fetch('/login',{
+    fetch('http://localhost:5555/login',{
       method: "POST",
       headers:  {
         'Content-Type': 'application/json',
         'Accepts': 'application/json'
       },
-      body: JSON.stringify(userdata)
+      body: JSON.stringify(userdata),
+      credentials: 'include'
     })
     .then(response => {
       if(response.ok){
@@ -84,8 +88,9 @@ function App() {
   }
 
   function handleLogout(){
-    fetch('/logout',{
-      method: 'DELETE'
+    fetch('http://localhost:5555/logout',{
+      method: 'DELETE',
+      credentials: 'include'
     })
     .then(response => {
       if (response.status === 204) {

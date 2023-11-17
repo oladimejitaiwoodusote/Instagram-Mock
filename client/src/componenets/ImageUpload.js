@@ -23,9 +23,10 @@ function ImageUpload() {
       formData.append('image', image);
       formData.append('caption', caption);
     
-    fetch('/image_upload', {
+    fetch('http://localhost:5555/image_upload', {
       method: 'POST',
       body: formData,
+      credentials: 'include'
     })
     .then(response => response.json())
     .then(data => {

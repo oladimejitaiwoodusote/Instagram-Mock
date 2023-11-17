@@ -15,7 +15,7 @@ function ProfilePage({currentUser}) {
 
     
     const fetchUserProfile = useCallback(() => {
-        fetch(`/user_profile/${userId}`)
+        fetch(`http://localhost:5555/user_profile/${userId}`)
         .then(response => response.json())
         .then(data => {
             setProfileUser(data)})
@@ -27,7 +27,7 @@ function ProfilePage({currentUser}) {
     useEffect(()=>{    
         fetchUserProfile()
         if (currentUser){       
-        fetch(`/users_posts/${userId}`)
+        fetch(`http://localhost:5555/users_posts/${userId}`)
         .then(response => response.json())
         .then(data => {
             setPosts(data)
