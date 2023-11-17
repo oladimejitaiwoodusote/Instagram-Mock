@@ -297,7 +297,9 @@ def update_profile(id):
 
         new_password = request.form.get('password')
         if new_password:
-            user.password = new_password        
+            #pw_hash = bcrypt.generate_password_hash(json['password']).decode('utf-8')
+            pw_hash = bcrypt.generate_password_hash(new_password).decode('utf-8')
+            user.password = pw_hash        
 
         db.session.commit()
         return jsonify({"message": "Profile updated successfully"}), 200
