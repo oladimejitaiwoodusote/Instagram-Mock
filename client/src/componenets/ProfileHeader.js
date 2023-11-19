@@ -7,7 +7,7 @@ function ProfileHeader({profileUser, currentUser, onClick}) {
   const [isFollowing, setIsFollowing] = useState(false)
 
   useEffect(()=> {
-    fetch(`http://localhost:5555/is_following/${currentUser.id}/${profileUser.id}`)
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/is_following/${currentUser.id}/${profileUser.id}`)
     .then(response => response.json())
     .then(data => setIsFollowing(data.message))
     .catch(error => {
@@ -17,7 +17,7 @@ function ProfileHeader({profileUser, currentUser, onClick}) {
 
   function handleFollowToggle(){
     const method = isFollowing? 'DELETE': 'POST'
-    const endpoint = isFollowing? `http://localhost:5555/unfollow/${currentUser.id}/${profileUser.id}`: `http://localhost:5555/follow/${currentUser.id}/${profileUser.id}`
+    const endpoint = isFollowing? `${process.env.REACT_APP_API_BASE_URL}/unfollow/${currentUser.id}/${profileUser.id}`: `${process.env.REACT_APP_API_BASE_URL}/follow/${currentUser.id}/${profileUser.id}`
 
     fetch(endpoint, {
       method: method

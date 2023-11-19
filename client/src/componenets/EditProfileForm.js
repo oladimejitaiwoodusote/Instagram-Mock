@@ -33,7 +33,7 @@ function EditProfileForm({currentUser, onClose, fetchUserProfile}) {
         formData.append('avatar', avatar)
         formData.append('currentPassword', currentPassword)
 
-        fetch(`http://localhost:5555/edit_profile/${currentUser.id}`, {
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/edit_profile/${currentUser.id}`, {
             method: 'PATCH',
             body: formData,
             credentials: 'include'

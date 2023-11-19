@@ -10,7 +10,7 @@ function DiscoverPage({currentUser}) {
 
     useEffect(()=> {
         if (currentUser){
-            fetch(`http://localhost:5555/user_discovery/${currentUser.id}`)
+            fetch(`${process.env.REACT_APP_API_BASE_URL}/user_discovery/${currentUser.id}`)
             .then(response => response.json())
             .then(data => setPosts(data))
             .catch(error => {

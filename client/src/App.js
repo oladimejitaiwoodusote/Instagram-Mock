@@ -17,7 +17,7 @@ function App() {
   const location = useLocation()
 
   useEffect(() => {
-    fetch('http://localhost:5555/check_session',{
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/check_session`,{
       credentials: 'include'
     })
     .then(response => {
@@ -36,7 +36,7 @@ function App() {
       }
     });
 
-    fetch('http://localhost:5555/users')
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/users`)
     .then(response => {
       if(response.ok) {
         return response.json()
@@ -52,7 +52,7 @@ function App() {
   },[navigate, location.pathname])
 
   function handleSignup(userdata){
-    fetch('http://localhost:5555/signup',{
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/signup`,{
       method : "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ function App() {
   }
   
   function handleLogin(userdata){
-    fetch('http://localhost:5555/login',{
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/login`,{
       method: "POST",
       headers:  {
         'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ function App() {
   }
 
   function handleLogout(){
-    fetch('http://localhost:5555/logout',{
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/logout`,{
       method: 'DELETE',
       credentials: 'include'
     })

@@ -16,26 +16,26 @@ function Post({post, user, onClick}) {
   const commentInputRef = useRef(null)
 
   useEffect(()=> {
-    fetch(`http://localhost:5555/comments/${post.id}`)
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/comments/${post.id}`)
     .then(response => response.json())
     .then(data => setComments(data.length))
   },[post.id])
 
   useEffect(()=> {
-    fetch(`http://localhost:5555/likes/${post.id}`)
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/likes/${post.id}`)
     .then(response => response.json())
     .then(data => setLikes(data.length))
   })  
 
   useEffect(()=> {
-    fetch(`http://localhost:5555/like_status/${post.id}/${user.id}`)
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/like_status/${post.id}/${user.id}`)
     .then(response => response.json())
     .then(data => setIsLiked(data.message))
   },[post.id, user.id]) 
 
   function handleLikeClick(){
     const method = isLiked ? "DELETE": "POST"
-    const endpoint = isLiked ? `http://localhost:5555/unlike/${post.id}/${user.id}` : `http://localhost:5555/like/${post.id}/${user.id}`
+    const endpoint = isLiked ? `${process.env.REACT_APP_API_BASE_URL}/unlike/${post.id}/${user.id}` : `${process.env.REACT_APP_API_BASE_URL}/like/${post.id}/${user.id}`
 
     fetch(endpoint, {
         method: method,
@@ -55,7 +55,7 @@ function Post({post, user, onClick}) {
       "post_id": post.id
     }
     
-    fetch(`http://localhost:5555/comment`,{
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/comment`,{
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

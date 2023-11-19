@@ -23,7 +23,7 @@ function ImageUpload() {
       formData.append('image', image);
       formData.append('caption', caption);
     
-    fetch('http://localhost:5555/image_upload', {
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/image_upload`, {
       method: 'POST',
       body: formData,
       credentials: 'include'
