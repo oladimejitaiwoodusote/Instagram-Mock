@@ -5,6 +5,8 @@ from models import *
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 import os
+import base64
+import json
 from werkzeug.utils import secure_filename
 from google.cloud import storage
 import random
@@ -17,8 +19,16 @@ app.json.compact = False
 app.secret_key = b'W(H5q*N86Z/+J72'
 
 #Cloud Lines
-service_account_key_path = os.environ.get('SERVICE_ACCOUNT_KEY_PATH')
-storage_client = storage.Client.from_service_account_json(service_account_key_path)
+# service_account_key_path = os.environ.get('SERVICE_ACCOUNT_KEY_PATH')
+# storage_client = storage.Client.from_service_account_json(service_account_key_path)
+# bucket = storage_client.bucket('instagram-clone')
+
+#Encoded
+encoded_service_account_key = os.environ.get('SERVICE_ACCOUNT_KEY_PATH')
+decoded_service_account_json = base64.b64decode(encoded_service_account_key).decode('utf-8')
+service_account_info = json.loads(decoded_service_account_json)
+
+storage_client = storage.Client.from_service_account_info(service_account_info)
 bucket = storage_client.bucket('instagram-clone')
 
 migrate = Migrate(app,db)
