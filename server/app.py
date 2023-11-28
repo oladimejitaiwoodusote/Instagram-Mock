@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, make_response, session
+from flask import Flask, request, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from models import *
@@ -7,13 +7,12 @@ from flask_bcrypt import Bcrypt
 import os
 import base64
 import json
-from werkzeug.utils import secure_filename
 from google.cloud import storage
 import random
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://myappuser:instagrampassword@localhost/instagrame_clone_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 app.secret_key = b'W(H5q*N86Z/+J72'

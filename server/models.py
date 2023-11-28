@@ -74,7 +74,7 @@ class Post(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     likes = db.relationship("Like", backref='post')
-    comments = db.relationship("Comment", backref="comment")
+    comments = db.relationship("Comment", backref="post")
 
     
     def __repr__(self):
