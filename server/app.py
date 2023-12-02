@@ -4,6 +4,7 @@ from flask_cors import CORS
 from models import *
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
+from sqlalchemy import create_engine, func
 import os
 import base64
 import json
@@ -12,18 +13,18 @@ import random
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://myappuser:instagrampassword@localhost/instagrame_clone_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    'pool_size': 3,
+    'max_overflow': 2,
+}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
-app.secret_key = b'W(H5q*N86Z/+J72'
-
-#Cloud Lines
-# service_account_key_path = os.environ.get('SERVICE_ACCOUNT_KEY_PATH')
-# storage_client = storage.Client.from_service_account_json(service_account_key_path)
-# bucket = storage_client.bucket('instagram-clone')
+#app.secret_key = b'W(H5q*N86Z/+J72'
+app.secret_key = os.environ.get('SECRET_KEY')
 
 #Encoded
-encoded_service_account_key = os.environ.get('SERVICE_ACCOUNT_KEY_PATH')
+encoded_service_account_key = os.environ.get('SERVICE_ACCOUNT_KEY')
 decoded_service_account_json = base64.b64decode(encoded_service_account_key).decode('utf-8')
 service_account_info = json.loads(decoded_service_account_json)
 
@@ -93,43 +94,31 @@ def get_posts(id):
 #Get Users Main Feed (Post of Users followed)
 @app.get('/users_followee_posts/<int:id>')
 def get_followee_posts(id):
-    user = User.query.where(User.id == id).first()
+    #Optimized version
+    user = User.query.get(id)
     if not user:
         return jsonify({"error": "User not found"}), 404
 
-    followees = user.following
-    followee_posts = []
-    for followee in followees:
-        for post in followee.posts:
-            followee_posts.append(post.to_dict())
+    followee_ids = [followee.id for followee in user.following]
+    followee_posts = Post.query.filter(Post.user_id.in_(followee_ids)).order_by(Post.created_at.desc()).all()
+    followee_posts_dicts = [post.to_dict() for post in followee_posts]
 
-    followee_posts.sort(key=lambda x: x['created_at'], reverse=True)
-    
-    return jsonify(followee_posts), 200
+    return jsonify(followee_posts_dicts),200
 
 #Get Users Discovery Page (Post of Users not followed)
 @app.get('/user_discovery/<int:id>')
 def get_discover_posts(id):
-    user = User.query.where(User.id == id).first()
+    #Optimized Version
+
+    user = User.query.get(id)
     if not user:
-        return jsonify({"error": "User not found"})
+        return jsonify({"error": "User not found"}), 404
 
+    followed_user_ids = [followee.id for followee in user.following]
+    discovery_posts = Post.query.filter(~Post.user_id.in_(followed_user_ids), Post.user_id != id).order_by(func.random()).limit(50).all()
+    discovery_posts_dicts = [post.to_dict() for post in discovery_posts]
 
-    followees = user.following
-    all_users = User.query.where(User.id != id).all()
-    discoveries = []
-    for user in all_users:
-        if user not in followees:
-            discoveries.append(user)
-
-    discovery_posts = []
-    for user in discoveries:
-        for post in user.posts:
-            discovery_posts.append(post.to_dict())
-
-    random.shuffle(discovery_posts)
-
-    return jsonify(discovery_posts), 200
+    return jsonify(discovery_posts_dicts), 200
 
 #Get Posts comments
 @app.get('/comments/<int:id>')
@@ -317,6 +306,7 @@ def update_profile(id):
         return jsonify({'message': 'Password not correct'}), 400
 
 
-
 if __name__ == "__main__":
+    with app.app_context():
+        print("pool size ={}".format(db.engine.pool.size()))
     app.run(port=5555, debug=False)
