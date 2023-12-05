@@ -18,9 +18,14 @@ app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
     'pool_size': 3,
     'max_overflow': 2,
 }
+# app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+#     'pool_size': 5,  # Maximum number of permanent connections to keep.
+#     'max_overflow': 2,  # Maximum number of overflow connections to create.
+#     'pool_timeout': 30,  # Maximum number of seconds to wait for a connection from the pool.
+#     'pool_recycle': 3600,  # Time in seconds a connection can be reused.
+# }
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
-#app.secret_key = b'W(H5q*N86Z/+J72'
 app.secret_key = os.environ.get('SECRET_KEY')
 
 #Encoded

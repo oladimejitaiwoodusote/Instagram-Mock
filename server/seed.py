@@ -3,6 +3,7 @@ from models import *
 from flask_bcrypt import Bcrypt
 from faker import Faker
 from random import randint, choice as rc, sample
+from sqlalchemy import text
 
 fake = Faker()
 bcrypt = Bcrypt(app)
@@ -17,7 +18,7 @@ def create_users():
      ]
 
     users = []
-    for _ in range(30):
+    for _ in range(10):
         u = User(
             email = fake.email(),
             username = fake.user_name(),
@@ -70,7 +71,7 @@ def create_posts(users):
       "https://upload.wikimedia.org/wikipedia/en/2/2c/AqueminiOutKast.jpg"
     ]
     posts = []
-    for _ in range(300):
+    for _ in range(50):
         p = Post(
             caption = fake.sentence(),
             image = rc(images),
@@ -81,7 +82,7 @@ def create_posts(users):
 
 def create_likes(users, posts):
     likes = []
-    for _ in range(600):
+    for _ in range(100):
         like = Like(
             user_id = rc([user.id for user in users]),
             post_id = rc([post.id for post in posts])
@@ -91,7 +92,7 @@ def create_likes(users, posts):
 
 def create_comments(users, posts):
     comments = []
-    for _ in range(300):
+    for _ in range(100):
         comment = Comment(
             user_id = rc([user.id for user in users]),
             post_id = rc([post.id for post in posts]),
@@ -100,12 +101,26 @@ def create_comments(users, posts):
         comments.append(comment)
     return comments
 
+def reset_sequence(table_name):
+    seq_name = f"{table_name}_id_seq"
+    with db.engine.connect() as conn:
+        conn.execute(text(f"ALTER SEQUENCE {seq_name} RESTART WITH 1"))
+        conn.execute(text("COMMIT;"))
+
 if __name__ == "__main__":
     with app.app_context():
-        User.query.delete()
-        Post.query.delete()
-        Like.query.delete()
         Comment.query.delete()
+        Like.query.delete()
+        Post.query.delete()
+        db.session.execute(user_follows.delete())
+        User.query.delete()
+
+        reset_sequence('users')
+        reset_sequence('posts')
+        reset_sequence('comments')
+        reset_sequence('likes')
+
+        db.session.commit()
     
         users = create_users()
         db.session.add_all(users)
