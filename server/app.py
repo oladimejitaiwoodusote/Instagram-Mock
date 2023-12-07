@@ -28,6 +28,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 app.secret_key = os.environ.get('SECRET_KEY')
 
+#Session Fix?
+app.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_HTTPONLY=True,
+)
+
 #Encoded
 encoded_service_account_key = os.environ.get('SERVICE_ACCOUNT_KEY')
 decoded_service_account_json = base64.b64decode(encoded_service_account_key).decode('utf-8')
