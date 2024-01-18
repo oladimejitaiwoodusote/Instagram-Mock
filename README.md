@@ -86,6 +86,6 @@ This project consists of two main parts: the backend (Flask app) and the fronten
 
 ### Frontend (React App)
 
-- Open new terminal and navigate to the client directory `cd ..` `cd client`
+- Open a new terminal and navigate to the client directory `cd ..` `cd client`
 - Install the necessary npm packages `npm install`
 - Start the React development server `npm run`
